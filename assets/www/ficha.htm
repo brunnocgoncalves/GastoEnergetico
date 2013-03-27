@@ -1,0 +1,303 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>Ficha</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" type="text/css" href="jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<script src="jquery-1.8.2.min.js"></script>
+	<script src="jquery.mobile-1.2.0.min.js"></script>
+	<script type="text/javascript" src="cordova-2.2.0.js"></script>
+    <script type="text/javascript" src="js/ficha.js"></script>
+</head> 
+<body> 
+			
+<!-- Start of first page -->
+<div data-role="page" id="peito" data-theme="b">
+
+	<div data-role="header" data-theme="b">
+		<h1>Peito</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="b">	
+	
+	<div class="ui-grid-solo" id="listPeito">
+	
+	<div class="ui-bar ui-bar-b">Exercícios</div>
+	
+	<div class="ui-bar ui-bar-c">Supino Reto</div>
+	
+	<div class="ui-bar ui-bar-c">Crucifixo</div>
+	
+	</div>
+
+<div data-role="collapsible-set">
+
+	<div data-role="collapsible">
+	<h3>Novo</h3>
+
+<div class="ui-grid-solo">
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">
+		<select name="selectExercicioPeito" id="selectExercicioPeito" data-mini="true"></select> 
+	</div></div>
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtSeries" pattern="[0-9]*" placeholder="Séries" id="txtSeries" value="" /></div></div>
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtRepeticao" pattern="[0-9]*" placeholder="Repetições" id="txtRepeticao" value="" /></div></div>
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtCarga" pattern="[0-9]*" placeholder="Carga" id="txtCarga" value="" /></div></div>
+</div>
+
+<div class="ui-bar ui-bar-c"><a href="#" data-icon="check" data-mini="true">Salvar</a></div>
+
+
+	</div>
+	
+</div>
+
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+<!-- Start of second page -->
+<div data-role="page" id="costas" data-theme="b">
+
+	<div data-role="header" data-theme="b">
+		<h1>Costas</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="b">	
+		
+<div class="ui-grid-c">
+	<div class="ui-block-a"><div class="ui-bar ui-bar-b">Exercício</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-b">Séries</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-b">Repetições</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-b">Carga</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">Pulley</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c">03</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c">08</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c">45</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">Remada baixa</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c">03</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c">12</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c">50</div></div>
+
+</div><!-- /grid-c -->
+
+<div data-role="collapsible-set">
+
+	<div data-role="collapsible">
+	<h3>Novo</h3>
+
+<div class="ui-grid-d">
+	<div class="ui-block-a"><div class="ui-bar ui-bar-b">Exercício</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-b">Séries</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-b">Repetições</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-b">Carga</div></div>
+	<div class="ui-block-e"><div class="ui-bar ui-bar-b">-</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">
+<select name="selectExercicio" id="select-choice-min" data-mini="true">
+   <option value="meia-elevacao">Pulley</option>
+   <option value="inverso">Remada baixa</option>
+</select> 
+	</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtSeries" pattern="[0-9]*" id="txtSeries" value="" /></div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtRepeticao" pattern="[0-9]*" id="txtRepeticao" value="" /></div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtCarga" pattern="[0-9]*" id="txtCarga" value="" /></div></div>
+	<div class="ui-block-e"><div class="ui-bar ui-bar-c"><a href="#" data-icon="check" data-mini="true">Salvar</a></div></div>
+
+</div>
+
+
+	</div>
+	
+</div>
+
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<!-- Start of third page -->
+<div data-role="page" id="perna" data-theme="b">
+
+	<div data-role="header" data-theme="b">
+		<h1>Perna</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="b">	
+<div class="ui-grid-c">
+	<div class="ui-block-a"><div class="ui-bar ui-bar-b">Exercício</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-b">Séries</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-b">Repetições</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-b">Carga</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">Leg Press 45</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c">03</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c">08</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c">150</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">Extensor</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c">03</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c">12</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c">80</div></div>
+
+</div><!-- /grid-c -->
+
+<div data-role="collapsible-set">
+
+	<div data-role="collapsible">
+	<h3>Novo</h3>
+
+<div class="ui-grid-d">
+	<div class="ui-block-a"><div class="ui-bar ui-bar-b">Exercício</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-b">Séries</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-b">Repetições</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-b">Carga</div></div>
+	<div class="ui-block-e"><div class="ui-bar ui-bar-b">-</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">
+<select name="selectExercicio" id="select-choice-min" data-mini="true">
+   <option value="meia-elevacao">Leg Press</option>
+   <option value="inverso">Extensor</option>
+   <option value="meia-elevacao">Flexor</option>
+   <option value="meia-elevacao">Panturrilha</option>
+   <option value="meia-elevacao">Abdução</option>
+</select> 
+	</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtSeries" pattern="[0-9]*" id="txtSeries" value="" /></div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtRepeticao" pattern="[0-9]*" id="txtRepeticao" value="" /></div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtCarga" pattern="[0-9]*" id="txtCarga" value="" /></div></div>
+	<div class="ui-block-e"><div class="ui-bar ui-bar-c"><a href="#" data-icon="check" data-mini="true">Salvar</a></div></div>
+
+</div>
+
+
+	</div>
+	
+</div>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<!-- Start of third page -->
+<div data-role="page" id="ombro" data-theme="b">
+
+	<div data-role="header" data-theme="b">
+		<h1>Ombro</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="b">	
+<div class="ui-grid-c">
+	<div class="ui-block-a"><div class="ui-bar ui-bar-b">Exercício</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-b">Séries</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-b">Repetições</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-b">Carga</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">Elevação frontal</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c">03</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c">08</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c">08</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">Abdução</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c">03</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c">12</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c">10</div></div>
+
+</div><!-- /grid-c -->
+
+<div data-role="collapsible-set">
+
+	<div data-role="collapsible">
+	<h3>Novo</h3>
+
+<div class="ui-grid-d">
+	<div class="ui-block-a"><div class="ui-bar ui-bar-b">Exercício</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-b">Séries</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-b">Repetições</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-b">Carga</div></div>
+	<div class="ui-block-e"><div class="ui-bar ui-bar-b">-</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">
+<select name="selectExercicio" id="select-choice-min" data-mini="true">
+   <option value="meia-elevacao">Elevação frontal</option>
+   <option value="inverso">Abdução</option>
+</select> 
+	</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtSeries" pattern="[0-9]*" id="txtSeries" value="" /></div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtRepeticao" pattern="[0-9]*" id="txtRepeticao" value="" /></div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtCarga" pattern="[0-9]*" id="txtCarga" value="" /></div></div>
+	<div class="ui-block-e"><div class="ui-bar ui-bar-c"><a href="#" data-icon="check" data-mini="true">Salvar</a></div></div>
+
+</div>
+
+
+	</div>
+	
+</div>
+			
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<!-- Start of third page -->
+<div data-role="page" id="abdominal" data-theme="b">
+
+	<div data-role="header" data-theme="b">
+		<h1>Abdominal</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="b">	
+<div class="ui-grid-c">
+	<div class="ui-block-a"><div class="ui-bar ui-bar-b">Exercício</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-b">Séries</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-b">Repetições</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-b">Carga</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">Inverso</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c">03</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c">10</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c">-</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">Meia elevação</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c">03</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c">10</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c">05</div></div>	
+
+</div><!-- /grid-c -->
+
+<div data-role="collapsible-set">
+
+	<div data-role="collapsible">
+	<h3>Novo</h3>
+
+<div class="ui-grid-d">
+	<div class="ui-block-a"><div class="ui-bar ui-bar-b">Exercício</div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-b">Séries</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-b">Repetições</div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-b">Carga</div></div>
+	<div class="ui-block-e"><div class="ui-bar ui-bar-b">-</div></div>
+
+	<div class="ui-block-a"><div class="ui-bar ui-bar-c">
+<select name="selectExercicio" id="select-choice-min" data-mini="true">
+   <option value="meia-elevacao">Meia elevação</option>
+   <option value="inverso">Inverso</option>
+</select> 
+	</div></div>
+	<div class="ui-block-b"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtSeries" pattern="[0-9]*" id="txtSeries" value="" /></div></div>
+	<div class="ui-block-c"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtRepeticao" pattern="[0-9]*" id="txtRepeticao" value="" /></div></div>
+	<div class="ui-block-d"><div class="ui-bar ui-bar-c"><input type="number" data-mini="true" name="txtCarga" pattern="[0-9]*" id="txtCarga" value="" /></div></div>
+	<div class="ui-block-e"><div class="ui-bar ui-bar-c"><a href="#" data-icon="check" data-mini="true">Salvar</a></div></div>
+
+</div>
+
+
+	</div>
+	
+</div>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+</body>
+</html>

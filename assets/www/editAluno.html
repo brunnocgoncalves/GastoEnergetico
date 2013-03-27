@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>Dados do aluno</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" type="text/css" href="jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<script src="jquery-1.8.2.min.js"></script>
+	<script src="jquery.mobile-1.2.0.min.js"></script>
+	<script type="text/javascript" src="cordova-2.2.0.js"></script>
+    <script type="text/javascript" src="js/editAluno.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" id="page">
+
+	<div data-role="header" class="ui-body ui-body-b">
+		<a href="index.htm" data-icon="delete" id="btnCancelar">Cancelar</a>
+		<h1>Aluno</h1>
+		<a href="#" data-icon="check" data-role="button" id="btnSalvar">Salvar</a>
+	</div>
+
+	<div data-role="content">
+		<form action="#" method="get" class="ui-body ui-body-c ui-corner-all">
+		<fieldset data-role="controlgroup">
+		<div data-role="fieldcontain">	
+			<label for="txtName">Nome:</label>
+			<input type="text" name="txtName" id="txtName" value="" data-mini="true" />
+			<label for="txtEmail">Email:</label>
+			<input type="email" name="txtEmail" id="txtEmail" value="" data-mini="true" />
+			<label for="txtCellphone">Celular:</label>
+			<input type="tel" name="txtCellphone" id="txtCellphone" value="" data-mini="true" />
+			<label for="txtBirth">Aniversário:</label>
+			<input type="date" name="txtBirth" id="txtBirth" value="" data-mini="true" />
+			<label for="txtAreaObs">Obs.:</label>
+			<textarea name="txtAreaObs" id="txtAreaObs"></textarea>
+
+			
+				<legend>Sexo:</legend>
+			     	<input type="radio" name="radioSexo" id="radioSexo-1" value="Masculino" checked="checked" />
+			     	<label for="radioSexo-1">Masculino</label>
+
+			     	<input type="radio" name="radioSexo" id="radioSexo-2" value="Feminino"  />
+			     	<label for="radioSexo-2">Feminino</label>
+
+		</div>
+		</fieldset>
+		</form>
+
+</div><!-- /page -->
+
+</body>
+</html>

@@ -1,0 +1,846 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>Gasto Energético</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" type="text/css" href="jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<script src="jquery-1.8.2.min.js"></script>
+	<script src="jquery.mobile-1.2.0.min.js"></script>
+	<script type="text/javascript" src="cordova-2.2.0.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" id="page">
+
+	<div class="ui-bar ui-bar-b">
+		<h3>Perfil</h3>
+	</div>
+
+	<div data-role="content">
+
+		<div class="ui-body ui-body-c">
+		
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<legend>Gênero:</legend>
+						<input type="radio" name="selectGenero" id="selectGenero1a" value="Masculino" checked="checked" />
+						<label for="selectGenero1a">Masculino</label>
+
+						<input type="radio" name="selectGenero" id="selectGeneroa" value="Feminino" />
+						<label for="selectGeneroa">Feminino</label>
+
+				</fieldset>
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="sliderIdade">Idade:</label>
+				<input type="number" name="sliderIdade" id="sliderIdade" value="21" data-highlight="true" />
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="numberMassa">Massa Corporal (kg):</label>
+				<input type="number" name="numberMassa" id="numberMassa" value="" />
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="numberAltura">Altura (cm):</label>
+				<input type="number" name="numberAltura" id="numberAltura" value="" />
+			</div>
+			
+			<div data-role="footer" data-theme="b">
+				<h3>IMC </h3>
+				<h3 name="numberIMC" id="numberIMC"></h3>
+				<h3 name="classIMC" id="classIMC"></h3>
+			</div>
+			
+		</div>
+		
+		<div data-role="collapsible" data-mini="true">
+		   <h3>? Informações</h3>
+		   <P>O Índice de Massa Corpórea, o IMC, ajuda a determinar se a massa corporal total está de acordo com a estatura, o que auxilia no processo de promoção e manutenção da saúde.</P>
+		   <p>Pessoas envolvidas em atividades físicas esportivas, como treinamento em academias de ginásticas, geralmente apresentam valores elevados de IMC.</p>
+		   <p>Isto é devido à maior quantidade de massa magra, o que não é nocivo para a saúde.</p>
+		   <p>Este aplicativo é útil como uma forma de referência inicial, mas para diagnósticos mais precisos consulte um Educador Físico, Nutricionista e/ou Médico especialista.</P>
+		</div>
+			
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="c">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#" data-role="button" data-icon="gear" data-iconpos="top" data-prefetch="true" class="ui-btn-active ui-state-persist" id="btnPerfil">Perfil</a></li>
+				<li><a href="#" data-role="button" data-icon="star" data-iconpos="top" data-prefetch="true" id="btnTMB">TMB / GET</a></li>
+				<li><a href="#" data-role="button" data-icon="grid" data-iconpos="top" data-prefetch="true" id="btnAtividade">Atividades</a></li>
+				<li><a href="#" data-role="button" data-icon="delete" data-iconpos="top" data-prefetch="true" id="btnSair">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+
+</div><!-- /page -->
+
+<div data-role="page" id="TMB">
+
+	<div class="ui-bar ui-bar-b">
+		<h3>TMB / GET</h3>
+	</div>
+	
+	<div data-role="content" data-theme="c">
+		
+		<a href="#" data-role="button" data-theme="a" id="btnTMBMG">Estou com excesso <br> de massa gorda</a>       
+		<a href="#" data-role="button" data-theme="e" id="btnTMBMM">Tenho grande <br> massa muscular</a>    
+	</div>
+	
+	<div data-role="collapsible" data-mini="true">
+	   <h3>? Informações</h3>
+	   <p>A TMB é influenciada principalmente pelo gênero, idade, massa corporal total e massa corporal magra.</p> 
+	   <p>Portanto, responda e preencha atenciosamente os dados solicitados.</P>
+	</div>
+	
+</div>
+
+<div data-role="page" id="TMBMG">
+
+	<div class="ui-bar ui-bar-b">
+		<h3>Taxa Metabólica basal (Kcal)</h3>
+	</div>
+	
+	<div data-role="footer" data-theme="c">
+		<h3 id="pTMBMG"></h3>
+	</div>
+	
+	<div data-role="collapsible" data-mini="true">
+	   <h3>? Informações</h3>
+	   <p>A Taxa Metabólica Basal, a TMB, representa a quantidade de energia (Calorias) gasta para realizar as funções vitais do organismo humano, em total repouso.</p>
+	   <p>A TMB é influenciada principalmente pelo gênero, idade, massa corporal total e massa corporal magra.</p> 
+	   <p>Portanto, responda e preencha atenciosamente os dados solicitados.</P>
+	   <p>A TMB é estimada a partir de referências da OMS (Organização Mundial de Saúde).</P>
+	</div>
+	
+	<div class="ui-bar ui-bar-b">
+		<h3>Nível diário de atividade física</h1>
+	</div>
+	
+	<div data-role="fieldcontain">
+		<fieldset data-role="controlgroup">
+		
+				<input type="radio" name="selectAtividadeMG" id="selectAtividadeMG1a" onClick="updateGETG();" value="INATIVIDADE" data-mini="false" checked="checked" />
+				<label for="selectAtividadeMG1a">INATIVIDADE</label>
+
+				<input type="radio" name="selectAtividadeMG" id="selectAtividadeMG1b" onClick="updateGETG();" value="LEVE" data-mini="false" />
+				<label for="selectAtividadeMG1b">LEVE</label>
+				
+				<input type="radio" name="selectAtividadeMG" id="selectAtividadeMG1c" onClick="updateGETG();" value="MODERADA" data-mini="false" />
+				<label for="selectAtividadeMG1c">MODERADA</label>
+				
+				<input type="radio" name="selectAtividadeMG" id="selectAtividadeMG1d" onClick="updateGETG();" value="PESADA" data-mini="false" />
+				<label for="selectAtividadeMG1d">PESADA</label>
+
+		</fieldset>
+	</div>
+	
+	<div data-role="collapsible" data-mini="true">
+	   <h3>? Informações</h3>
+		<p><strong>Inatividade:</strong> Apenas atividades cotidianas. Nenhuma atividade esportiva ou de condicionamento.</p>
+		<p><strong>Leve:</strong> Atividade profissional com significativo esforço físico, ou prática de atividades físicas de condicionamento (academias, outras) de intensidade leve.</p>
+		<p><strong>Moderado:</strong> Atividade física de condicionamento com intensidade moderada-alta. Também, atividade profissional de alta intensidade, somada a atividades de condicionamento de intensidade leve.</p>
+		<p><strong>Pesado:</strong> Atletas de alto nível de rendimento. Também, atividade física de condicionamento de alta intensidade, somada a atividade profissional de alta intensidade.</p>
+		<p>Em caso de dúvidas, não deixe de entrar em contato: <strong>zeusresponde@zeusfitness.com.br</strong>.</p>
+	</div>
+	
+	<div data-role="footer" data-theme="b">
+		<h3>GET (Kcal):</h3>
+		<h3 name="pGETMG" id="pGETMG">200</h3>
+	</div>
+	
+	<div data-role="collapsible" data-mini="true">
+	   <h3>? Informações</h3>
+	   <p>O Gasto Energético Total, o GET, determina a quantidade de energia (Calorias) gasta durante todo o dia (24 horas).</p>
+	   <p>O GET engloba as atividades mais simples, como falar, escrever ou comer, e as mais complexas, como a prática de esportes.</p> 
+	   <p>A partir desses valores é possível determinar a quantidade de energia necessária para emagrecer, manter ou aumentar a massa corporal.</p>
+	   <p>O GET também é estimado a partir de referências da OMS (Organização Mundial de Saúde).</p>
+	   <p>Para valores mais precisos utilize a versão PREMIUM, indicando todas as atividades, sejam cotidianas ou esportivas, e o tempo gasto em cada uma delas.</p>
+	   <p>Também na versão PREMIUM saiba quantas calorias são necessárias para alterar ou manter o seu peso (massa corporal total).</p>
+	</div>
+	
+	<div data-role="footer" data-theme="c" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#" data-role="button" data-icon="gear" data-iconpos="top" data-prefetch="true" id="btnPerfilTMBMG">Perfil</a></li>
+				<li><a href="#" data-role="button" data-icon="star" data-iconpos="top" data-prefetch="true" class="ui-btn-active ui-state-persist" id="btnTMBTMBMG">TMB / GET</a></li>
+				<li><a href="#" data-role="button" data-icon="grid" data-iconpos="top" data-prefetch="true" id="btnAtividadeTMBMG">Atividades</a></li>
+				<li><a href="#" data-role="button" data-icon="delete" data-iconpos="top" data-prefetch="true" id="btnSairTMBMG">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+	
+</div>
+
+<div data-role="page" id="TMBMM">
+
+	<div class="ui-bar ui-bar-b">
+		<h3>Taxa Metabólica basal (Kcal)</h3>
+	</div>
+	
+	<div data-role="footer" data-theme="c">
+		<h3 id="pTMBMM"></h3>
+	</div>
+	
+	<div data-role="collapsible" data-mini="true">
+	   <h3>? Informações</h3>
+	   <p>A Taxa Metabólica Basal, a TMB, representa a quantidade de energia (Calorias) gasta para realizar as funções vitais do organismo humano, em total repouso.</p>
+	   <p>A TMB é influenciada principalmente pelo gênero, idade, massa corporal total e massa corporal magra.</p> 
+	   <p>Portanto, responda e preencha atenciosamente os dados solicitados.</P>
+	   <p>A TMB é estimada a partir de referências da OMS (Organização Mundial de Saúde).</P>
+	</div>
+	
+	<div class="ui-bar ui-bar-b">
+		<h3>Nível diário de atividade física</h1>
+	</div>
+	
+	<div data-role="fieldcontain">
+		<fieldset data-role="controlgroup">
+		
+				<input type="radio" name="selectAtividadeMM" id="selectAtividadeMM1a" onClick="updateGET();" value="INATIVIDADE" data-mini="false" checked="checked" />
+				<label for="selectAtividadeMM1a">INATIVIDADE</label>
+
+				<input type="radio" name="selectAtividadeMM" id="selectAtividadeMM1b" onClick="updateGET();" value="LEVE" data-mini="false" />
+				<label for="selectAtividadeMM1b">LEVE</label>
+				
+				<input type="radio" name="selectAtividadeMM" id="selectAtividadeMM1c" onClick="updateGET();" value="MODERADA" data-mini="false" />
+				<label for="selectAtividadeMM1c">MODERADA</label>
+				
+				<input type="radio" name="selectAtividadeMM" id="selectAtividadeMM1d" onClick="updateGET();" value="PESADA" data-mini="false" />
+				<label for="selectAtividadeMM1d">PESADA</label>
+
+		</fieldset>
+	</div>
+	
+	<div data-role="collapsible" data-mini="true">
+	   <h3>? Informações</h3>
+		<p><strong>Inatividade:</strong> Apenas atividades cotidianas. Nenhuma atividade esportiva ou de condicionamento.</p>
+		<p><strong>Leve:</strong> Atividade profissional com significativo esforço físico, ou prática de atividades físicas de condicionamento (academias, outras) de intensidade leve.</p>
+		<p><strong>Moderado:</strong> Atividade física de condicionamento com intensidade moderada-alta. Também, atividade profissional de alta intensidade, somada a atividades de condicionamento de intensidade leve.</p>
+		<p><strong>Pesado:</strong> Atletas de alto nível de rendimento. Também, atividade física de condicionamento de alta intensidade, somada a atividade profissional de alta intensidade.</p>
+		<p>Em caso de dúvidas, não deixe de entrar em contato: <strong>zeusresponde@zeusfitness.com.br</strong>.</p>
+	</div>
+	
+	<div data-role="footer" data-theme="b">
+		<h3>GET (Kcal):</h3>
+		<h3 name="pGETMM" id="pGETMM">200</h3>
+	</div>
+	
+	<div data-role="collapsible" data-mini="true">
+	   <h3>? Informações</h3>
+	   <p>O Gasto Energético Total, o GET, determina a quantidade de energia (Calorias) gasta durante todo o dia (24 horas).</p>
+	   <p>O GET engloba as atividades mais simples, como falar, escrever ou comer, e as mais complexas, como a prática de esportes.</p> 
+	   <p>A partir desses valores é possível determinar a quantidade de energia necessária para emagrecer, manter ou aumentar a massa corporal.</p>
+	   <p>O GET também é estimado a partir de referências da OMS (Organização Mundial de Saúde).</p>
+	   <p>Para valores mais precisos utilize a versão PREMIUM, indicando todas as atividades, sejam cotidianas ou esportivas, e o tempo gasto em cada uma delas.</p>
+	   <p>Também na versão PREMIUM saiba quantas calorias são necessárias para alterar ou manter o seu peso (massa corporal total).</p>
+	</div>
+	
+	<div data-role="footer" data-theme="c" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#" data-role="button" data-icon="gear" data-iconpos="top" data-prefetch="true" id="btnPerfilTMBMM">Perfil</a></li>
+				<li><a href="#" data-role="button" data-icon="star" data-iconpos="top" data-prefetch="true" class="ui-btn-active ui-state-persist" id="btnTMBTMBMM">TMB / GET</a></li>
+				<li><a href="#" data-role="button" data-icon="grid" data-iconpos="top" data-prefetch="true" id="btnAtividadeTMBMM">Atividades</a></li>
+				<li><a href="#" data-role="button" data-icon="delete" data-iconpos="top" data-prefetch="true" id="btnSairTMBMM">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+	
+</div>
+
+<div data-role="page" id="listaAtividades">
+
+	<div class="ui-bar ui-bar-b">
+		<h3>GASTO ENERGÉTICO POR ATIVIDADE FÍSICA</h3>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="ui-body ui-body-c">
+			<div class="content-primary">	
+				<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+						<h2>ATIVIDADES DOMÉSTICAS</h2>
+						<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+							<li data-role="list-divider">ATIVIDADES DOMÉSTICAS<span class="ui-li-count">30</span></li>
+							<li data-filtertext='Limpeza pesada, esforço vigoroso.'><a href='#' onclick="carregaAtividade('Limpeza pesada, esforço vigoroso.','3,5');">Limpeza pesada, esforço vigoroso.</a></li>
+<li data-filtertext='Varrer o chão, tapete.'><a href='#' onclick="carregaAtividade('Varrer o chão, tapete.','3,5');">Varrer o chão, tapete.</a></li>
+<li data-filtertext='Limpeza de chão, passar pano, rodo.'><a href='#' onclick="carregaAtividade('Limpeza de chão, passar pano, rodo.','4');">Limpeza de chão, passar pano, rodo.</a></li>
+<li data-filtertext='Limpeza leve (espanar pó, passar aspirador, mudar roupa de cama).'><a href='#' onclick="carregaAtividade('Limpeza leve (espanar pó, passar aspirador, mudar roupa de cama).','2,5');">Limpeza leve (espanar pó, passar aspirador, mudar roupa de cama).</a></li>
+<li data-filtertext='Lavar pratos.'><a href='#' onclick="carregaAtividade('Lavar pratos.','2,3');">Lavar pratos.</a></li>
+<li data-filtertext='Cozinhar e preparar comida.'><a href='#' onclick="carregaAtividade('Cozinhar e preparar comida.','2');">Cozinhar e preparar comida.</a></li>
+<li data-filtertext='Alimentar animais.'><a href='#' onclick="carregaAtividade('Alimentar animais.','2,5');">Alimentar animais.</a></li>
+<li data-filtertext='Carregar compras escada acima.'><a href='#' onclick="carregaAtividade('Carregar compras escada acima.','7,5');">Carregar compras escada acima.</a></li>
+<li data-filtertext='Comprar alimentos, com ou sem carrinho de supermercado.'><a href='#' onclick="carregaAtividade('Comprar alimentos, com ou sem carrinho de supermercado.','2,3');">Comprar alimentos, com ou sem carrinho de supermercado.</a></li>
+<li data-filtertext='Fazer compras, em pé ou caminhando (shopping).'><a href='#' onclick="carregaAtividade('Fazer compras, em pé ou caminhando (shopping).','2,3');">Fazer compras, em pé ou caminhando (shopping).</a></li>
+<li data-filtertext='Passar a roupa.'><a href='#' onclick="carregaAtividade('Passar a roupa.','2,3');">Passar a roupa.</a></li>
+<li data-filtertext='Costurar, bordar.'><a href='#' onclick="carregaAtividade('Costurar, bordar.','1,5');">Costurar, bordar.</a></li>
+<li data-filtertext='Lavar roupa de pé, dobrar ou pendurar roupas, colocar roupa na lavadora ou secadora, fazer malas.'><a href='#' onclick="carregaAtividade('Lavar roupa de pé, dobrar ou pendurar roupas, colocar roupa na lavadora ou secadora, fazer malas.','2');">Lavar roupa de pé, dobrar ou pendurar roupas, colocar roupa na lavadora ou secadora, fazer malas.</a></li>
+<li data-filtertext='Fazer a cama. '><a href='#' onclick="carregaAtividade('Fazer a cama. ','2');">Fazer a cama. </a></li>
+<li data-filtertext='Mudar móveis de lugar.'><a href='#' onclick="carregaAtividade('Mudar móveis de lugar.','6');">Mudar móveis de lugar.</a></li>
+<li data-filtertext='Esfregar o chão com as mãos.'><a href='#' onclick="carregaAtividade('Esfregar o chão com as mãos.','3,8');">Esfregar o chão com as mãos.</a></li>
+<li data-filtertext='Regando plantas.'><a href='#' onclick="carregaAtividade('Regando plantas.','2,5');">Regando plantas.</a></li>
+<li data-filtertext='Acendendo a lareira (preparação inclusive).'><a href='#' onclick="carregaAtividade('Acendendo a lareira (preparação inclusive).','2,5');">Acendendo a lareira (preparação inclusive).</a></li>
+<li data-filtertext='Carregar caixas ou móveis.'><a href='#' onclick="carregaAtividade('Carregar caixas ou móveis.','9');">Carregar caixas ou móveis.</a></li>
+<li data-filtertext='Brincar com criança(s) - esforço leve (apenas períodos ativos).'><a href='#' onclick="carregaAtividade('Brincar com criança(s) - esforço leve (apenas períodos ativos).','2,5');">Brincar com criança(s) - esforço leve (apenas períodos ativos).</a></li>
+<li data-filtertext='Brincar com criança(s) - esforço moderado (apenas períodos ativos).'><a href='#' onclick="carregaAtividade('Brincar com criança(s) - esforço moderado (apenas períodos ativos).','4');">Brincar com criança(s) - esforço moderado (apenas períodos ativos).</a></li>
+<li data-filtertext='Brincar com criança(s) - esforço vigoroso (apenas períodos ativos).'><a href='#' onclick="carregaAtividade('Brincar com criança(s) - esforço vigoroso (apenas períodos ativos).','5');">Brincar com criança(s) - esforço vigoroso (apenas períodos ativos).</a></li>
+<li data-filtertext='Carregar criança pequena.'><a href='#' onclick="carregaAtividade('Carregar criança pequena.','3');">Carregar criança pequena.</a></li>
+<li data-filtertext='Cuidar de criança: vesti-la, dar banho, etc.'><a href='#' onclick="carregaAtividade('Cuidar de criança: vesti-la, dar banho, etc.','2,5');">Cuidar de criança: vesti-la, dar banho, etc.</a></li>
+<li data-filtertext='Cuidar de idoso, adulto incapacitado (apenas períodos ativos).'><a href='#' onclick="carregaAtividade('Cuidar de idoso, adulto incapacitado (apenas períodos ativos).','4');">Cuidar de idoso, adulto incapacitado (apenas períodos ativos).</a></li>
+<li data-filtertext='Recostar-se com um bebê no colo.'><a href='#' onclick="carregaAtividade('Recostar-se com um bebê no colo.','1,5');">Recostar-se com um bebê no colo.</a></li>
+<li data-filtertext='Brincar com animais, esforço leve (apenas períodos ativos).'><a href='#' onclick="carregaAtividade('Brincar com animais, esforço leve (apenas períodos ativos).','2,8');">Brincar com animais, esforço leve (apenas períodos ativos).</a></li>
+<li data-filtertext='Brincar com animais, esforço moderado (apenas períodos ativos).'><a href='#' onclick="carregaAtividade('Brincar com animais, esforço moderado (apenas períodos ativos).','4');">Brincar com animais, esforço moderado (apenas períodos ativos).</a></li>
+<li data-filtertext='Brincar com animais, esforço vigoroso (apenas períodos ativos).'><a href='#' onclick="carregaAtividade('Brincar com animais, esforço vigoroso (apenas períodos ativos).','5');">Brincar com animais, esforço vigoroso (apenas períodos ativos).</a></li>
+<li data-filtertext='Dar banho em animais.'><a href='#' onclick="carregaAtividade('Dar banho em animais.','3,5');">Dar banho em animais.</a></li>
+
+						</ul>
+					</div>
+					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+						<h2>ATIVIDADES OCUPACIONAIS</h2>
+						<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+							<li data-role="list-divider">ATIVIDADES OCUPACIONAIS<span class="ui-li-count">61</span></li>
+							<li data-filtertext='Conserto de máquinas (mecânica) – Mecânico.'><a href='#' onclick="carregaAtividade('Conserto de máquinas (mecânica) – Mecânico.','3,5');">Conserto de máquinas (mecânica) – Mecânico.</a></li>
+<li data-filtertext='Carpintaria, geral.'><a href='#' onclick="carregaAtividade('Carpintaria, geral.','4');">Carpintaria, geral.</a></li>
+<li data-filtertext='Calafetagem.'><a href='#' onclick="carregaAtividade('Calafetagem.','5');">Calafetagem.</a></li>
+<li data-filtertext='Limpar calhas.'><a href='#' onclick="carregaAtividade('Limpar calhas.','5');">Limpar calhas.</a></li>
+<li data-filtertext='Instalar janelas pesadas.'><a href='#' onclick="carregaAtividade('Instalar janelas pesadas.','5');">Instalar janelas pesadas.</a></li>
+<li data-filtertext='Colocar ou remover carpete, piso.'><a href='#' onclick="carregaAtividade('Colocar ou remover carpete, piso.','4,5');">Colocar ou remover carpete, piso.</a></li>
+<li data-filtertext='Pintar.'><a href='#' onclick="carregaAtividade('Pintar.','4,5');">Pintar.</a></li>
+<li data-filtertext='Consertar telhado.'><a href='#' onclick="carregaAtividade('Consertar telhado.','6');">Consertar telhado.</a></li>
+<li data-filtertext='Retirar terra com pá.'><a href='#' onclick="carregaAtividade('Retirar terra com pá.','5');">Retirar terra com pá.</a></li>
+<li data-filtertext='Reparos elétricos e hidráulicos.'><a href='#' onclick="carregaAtividade('Reparos elétricos e hidráulicos.','3');">Reparos elétricos e hidráulicos.</a></li>
+<li data-filtertext='Confeitaria, geral.'><a href='#' onclick="carregaAtividade('Confeitaria, geral.','3');">Confeitaria, geral.</a></li>
+<li data-filtertext='Transporte de cargas pesadas (como tijolos).'><a href='#' onclick="carregaAtividade('Transporte de cargas pesadas (como tijolos).','8');">Transporte de cargas pesadas (como tijolos).</a></li>
+<li data-filtertext='Mineração de carvão, geral.'><a href='#' onclick="carregaAtividade('Mineração de carvão, geral.','6');">Mineração de carvão, geral.</a></li>
+<li data-filtertext='Construção civil, pedreiro.'><a href='#' onclick="carregaAtividade('Construção civil, pedreiro.','5,5');">Construção civil, pedreiro.</a></li>
+<li data-filtertext='Atividade na fazenda, geral.'><a href='#' onclick="carregaAtividade('Atividade na fazenda, geral.','4');">Atividade na fazenda, geral.</a></li>
+<li data-filtertext='Bombeiro, geral.'><a href='#' onclick="carregaAtividade('Bombeiro, geral.','8');">Bombeiro, geral.</a></li>
+<li data-filtertext='Atividade florestal, geral. '><a href='#' onclick="carregaAtividade('Atividade florestal, geral. ','8');">Atividade florestal, geral. </a></li>
+<li data-filtertext='Cuidar de cavalos.'><a href='#' onclick="carregaAtividade('Cuidar de cavalos.','6');">Cuidar de cavalos.</a></li>
+<li data-filtertext='Equitação, galope.'><a href='#' onclick="carregaAtividade('Equitação, galope.','8');">Equitação, galope.</a></li>
+<li data-filtertext='Equitação, ao passo lento.'><a href='#' onclick="carregaAtividade('Equitação, ao passo lento.','2,6');">Equitação, ao passo lento.</a></li>
+<li data-filtertext='Serralheria.'><a href='#' onclick="carregaAtividade('Serralheria.','3,5');">Serralheria.</a></li>
+<li data-filtertext='Operar máquinas leves (britadeira, martelo, furadeira, solda).'><a href='#' onclick="carregaAtividade('Operar máquinas leves (britadeira, martelo, furadeira, solda).','3,5');">Operar máquinas leves (britadeira, martelo, furadeira, solda).</a></li>
+<li data-filtertext='Maçonaria, concreto.'><a href='#' onclick="carregaAtividade('Maçonaria, concreto.','7');">Maçonaria, concreto.</a></li>
+<li data-filtertext='Fazer massagem, em pé.'><a href='#' onclick="carregaAtividade('Fazer massagem, em pé.','4');">Fazer massagem, em pé.</a></li>
+<li data-filtertext='Mudar objetos pesados (mobiliário, mudanças).'><a href='#' onclick="carregaAtividade('Mudar objetos pesados (mobiliário, mudanças).','7,5');">Mudar objetos pesados (mobiliário, mudanças).</a></li>
+<li data-filtertext='Trabalho de impressão gráfica (em pé).'><a href='#' onclick="carregaAtividade('Trabalho de impressão gráfica (em pé).','2,3');">Trabalho de impressão gráfica (em pé).</a></li>
+<li data-filtertext='Policial, geral.'><a href='#' onclick="carregaAtividade('Policial, geral.','2,5');">Policial, geral.</a></li>
+<li data-filtertext='Reparo de sapatos. Sapateiro.'><a href='#' onclick="carregaAtividade('Reparo de sapatos. Sapateiro.','2,5');">Reparo de sapatos. Sapateiro.</a></li>
+<li data-filtertext='Trabalho leve de escritório, geral.'><a href='#' onclick="carregaAtividade('Trabalho leve de escritório, geral.','1,5');">Trabalho leve de escritório, geral.</a></li>
+<li data-filtertext='Trabalho sentado, moderado.'><a href='#' onclick="carregaAtividade('Trabalho sentado, moderado.','2,5');">Trabalho sentado, moderado.</a></li>
+<li data-filtertext='Trabalho em pé, leve (atendimento em bar, vendas).'><a href='#' onclick="carregaAtividade('Trabalho em pé, leve (atendimento em bar, vendas).','2,3');">Trabalho em pé, leve (atendimento em bar, vendas).</a></li>
+<li data-filtertext='Cuidar de pacientes, Enfermagem.'><a href='#' onclick="carregaAtividade('Cuidar de pacientes, Enfermagem.','3');">Cuidar de pacientes, Enfermagem.</a></li>
+<li data-filtertext='Siderurgia/Metalurgia, trabalhos em geral.'><a href='#' onclick="carregaAtividade('Siderurgia/Metalurgia, trabalhos em geral.','4');">Siderurgia/Metalurgia, trabalhos em geral.</a></li>
+<li data-filtertext='Alfaiataria, em geral. Alfaiate.'><a href='#' onclick="carregaAtividade('Alfaiataria, em geral. Alfaiate.','8');">Alfaiataria, em geral. Alfaiate.</a></li>
+<li data-filtertext='Dirigir caminhão, carregar e descarregar caminhão (de pé).'><a href='#' onclick="carregaAtividade('Dirigir caminhão, carregar e descarregar caminhão (de pé).','2,5');">Dirigir caminhão, carregar e descarregar caminhão (de pé).</a></li>
+<li data-filtertext='Trabalhar em computador. Digitação. Programador.'><a href='#' onclick="carregaAtividade('Trabalhar em computador. Digitação. Programador.','6,5');">Trabalhar em computador. Digitação. Programador.</a></li>
+<li data-filtertext='Caminhar no trabalho (no escritório), sem carregar nada.'><a href='#' onclick="carregaAtividade('Caminhar no trabalho (no escritório), sem carregar nada.','2');">Caminhar no trabalho (no escritório), sem carregar nada.</a></li>
+<li data-filtertext='Caminhar no trabalho, carregando objetos leves.'><a href='#' onclick="carregaAtividade('Caminhar no trabalho, carregando objetos leves.','3');">Caminhar no trabalho, carregando objetos leves.</a></li>
+<li data-filtertext='Caminhando, empurrando uma cadeira de rodas.'><a href='#' onclick="carregaAtividade('Caminhando, empurrando uma cadeira de rodas.','4');">Caminhando, empurrando uma cadeira de rodas.</a></li>
+<li data-filtertext='Caminhar, descer rampas ou escadas, carregando objetos leves.'><a href='#' onclick="carregaAtividade('Caminhar, descer rampas ou escadas, carregando objetos leves.','4');">Caminhar, descer rampas ou escadas, carregando objetos leves.</a></li>
+<li data-filtertext='Caminhar, descer escadas ou rampas, carregando objetos de peso moderado a pesado.'><a href='#' onclick="carregaAtividade('Caminhar, descer escadas ou rampas, carregando objetos de peso moderado a pesado.','5');">Caminhar, descer escadas ou rampas, carregando objetos de peso moderado a pesado.</a></li>
+<li data-filtertext='Trabalhar no teatro. Ator ou bastidores.'><a href='#' onclick="carregaAtividade('Trabalhar no teatro. Ator ou bastidores.','7,5');">Trabalhar no teatro. Ator ou bastidores.</a></li>
+<li data-filtertext='Ensinar Educação Física, exercícios, aulas esportivas, sem jogos esportivos.'><a href='#' onclick="carregaAtividade('Ensinar Educação Física, exercícios, aulas esportivas, sem jogos esportivos.','3');">Ensinar Educação Física, exercícios, aulas esportivas, sem jogos esportivos.</a></li>
+<li data-filtertext='Ensinar Educação Física, exercícios, aulas esportivas (participando da aula).'><a href='#' onclick="carregaAtividade('Ensinar Educação Física, exercícios, aulas esportivas (participando da aula).','4');">Ensinar Educação Física, exercícios, aulas esportivas (participando da aula).</a></li>
+<li data-filtertext='Dirigir caminhão leve.'><a href='#' onclick="carregaAtividade('Dirigir caminhão leve.','6,5');">Dirigir caminhão leve.</a></li>
+<li data-filtertext='Dirigir carro.'><a href='#' onclick="carregaAtividade('Dirigir carro.','1,8');">Dirigir carro.</a></li>
+<li data-filtertext='Dirigir ônibus.'><a href='#' onclick="carregaAtividade('Dirigir ônibus.','1,5');">Dirigir ônibus.</a></li>
+<li data-filtertext='Pilotar avião.'><a href='#' onclick="carregaAtividade('Pilotar avião.','1,3');">Pilotar avião.</a></li>
+<li data-filtertext='Dirigir motocicleta.'><a href='#' onclick="carregaAtividade('Dirigir motocicleta.','2');">Dirigir motocicleta.</a></li>
+<li data-filtertext='Cortar lenha ou troncos.'><a href='#' onclick="carregaAtividade('Cortar lenha ou troncos.','6');">Cortar lenha ou troncos.</a></li>
+<li data-filtertext='Limpar terreno.'><a href='#' onclick="carregaAtividade('Limpar terreno.','6');">Limpar terreno.</a></li>
+<li data-filtertext='Cavar, remover terra do jardim ou plantação.'><a href='#' onclick="carregaAtividade('Cavar, remover terra do jardim ou plantação.','5');">Cavar, remover terra do jardim ou plantação.</a></li>
+<li data-filtertext='Jardinagem com serra elétrica.'><a href='#' onclick="carregaAtividade('Jardinagem com serra elétrica.','5');">Jardinagem com serra elétrica.</a></li>
+<li data-filtertext='Aparar o gramado, geral.'><a href='#' onclick="carregaAtividade('Aparar o gramado, geral.','5');">Aparar o gramado, geral.</a></li>
+<li data-filtertext='Semear, plantar, geral.'><a href='#' onclick="carregaAtividade('Semear, plantar, geral.','4,5');">Semear, plantar, geral.</a></li>
+<li data-filtertext='Varrer folhas com ancinho'><a href='#' onclick="carregaAtividade('Varrer folhas com ancinho','4,5');">Varrer folhas com ancinho</a></li>
+<li data-filtertext='Varrer o telhado com vassoura de neve.'><a href='#' onclick="carregaAtividade('Varrer o telhado com vassoura de neve.','4,3');">Varrer o telhado com vassoura de neve.</a></li>
+<li data-filtertext='Aparar arbustos ou árvores.'><a href='#' onclick="carregaAtividade('Aparar arbustos ou árvores.','4,5');">Aparar arbustos ou árvores.</a></li>
+<li data-filtertext='Regar gramado ou jardim.'><a href='#' onclick="carregaAtividade('Regar gramado ou jardim.','3,5');">Regar gramado ou jardim.</a></li>
+<li data-filtertext='Jardinagem, geral.'><a href='#' onclick="carregaAtividade('Jardinagem, geral.','2');">Jardinagem, geral.</a></li>
+<li data-filtertext='Recolher/colher folhas, gravetos ou vegetais.'><a href='#' onclick="carregaAtividade('Recolher/colher folhas, gravetos ou vegetais.','4');">Recolher/colher folhas, gravetos ou vegetais.</a></li>
+
+						</ul>
+					</div>
+					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+						<h2>ATIVIDADES SEXUAIS</h2>
+						<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+							<li data-role="list-divider">ATIVIDADES SEXUAIS<span class="ui-li-count">04</span></li>
+							<li data-filtertext='Ativa, esforço vigoroso.'><a href='#' onclick="carregaAtividade('Ativa, esforço vigoroso.','1,5');">Ativa, esforço vigoroso.</a></li>
+<li data-filtertext='Geral, esforço moderado.'><a href='#' onclick="carregaAtividade('Geral, esforço moderado.','1,3');">Geral, esforço moderado.</a></li>
+<li data-filtertext='Passiva, esforço leve.'><a href='#' onclick="carregaAtividade('Passiva, esforço leve.','1');">Passiva, esforço leve.</a></li>
+<li data-filtertext='Beijos, abraços.'><a href='#' onclick="carregaAtividade('Beijos, abraços.','1');">Beijos, abraços.</a></li>
+
+						</ul>
+					</div>
+					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+						<h2>CUIDADOS PESSOAIS</h2>
+						<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+							<li data-role="list-divider">CUIDADOS PESSOAIS<span class="ui-li-count">10</span></li>
+							<li data-filtertext='Sentado na privada (defecar, urinar).'><a href='#' onclick="carregaAtividade('Sentado na privada (defecar, urinar).','1');">Sentado na privada (defecar, urinar).</a></li>
+<li data-filtertext='Vestir-se ou tirar a roupa.'><a href='#' onclick="carregaAtividade('Vestir-se ou tirar a roupa.','2');">Vestir-se ou tirar a roupa.</a></li>
+<li data-filtertext='Comer (sentado).'><a href='#' onclick="carregaAtividade('Comer (sentado).','1,5');">Comer (sentado).</a></li>
+<li data-filtertext='Conversar e comer, ou somente comer de pé.'><a href='#' onclick="carregaAtividade('Conversar e comer, ou somente comer de pé.','2');">Conversar e comer, ou somente comer de pé.</a></li>
+<li data-filtertext='Tomar remédio.'><a href='#' onclick="carregaAtividade('Tomar remédio.','1');">Tomar remédio.</a></li>
+<li data-filtertext='Higiene pessoal (lavar-se, barbear-se, escovar os dentes, lavar as mãos, etc.).'><a href='#' onclick="carregaAtividade('Higiene pessoal (lavar-se, barbear-se, escovar os dentes, lavar as mãos, etc.).','2');">Higiene pessoal (lavar-se, barbear-se, escovar os dentes, lavar as mãos, etc.).</a></li>
+<li data-filtertext='Maquiar (maquiagem)'><a href='#' onclick="carregaAtividade('Maquiar (maquiagem)','1,5');">Maquiar (maquiagem)</a></li>
+<li data-filtertext='Fazer um penteado.'><a href='#' onclick="carregaAtividade('Fazer um penteado.','2,5');">Fazer um penteado.</a></li>
+<li data-filtertext='Ter o cabelo ou unha cuidados por terceiros, sentado.'><a href='#' onclick="carregaAtividade('Ter o cabelo ou unha cuidados por terceiros, sentado.','1');">Ter o cabelo ou unha cuidados por terceiros, sentado.</a></li>
+<li data-filtertext='Tomar banho, geral.'><a href='#' onclick="carregaAtividade('Tomar banho, geral.','2');">Tomar banho, geral.</a></li>
+
+						</ul>
+					</div>
+					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+						<h2>Danças</h2>
+						<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+							<li data-role="list-divider">Danças<span class="ui-li-count">06</span></li>
+							<li data-filtertext='Balé ou dança moderna, twist, jazz, sapateado.'><a href='#' onclick="carregaAtividade('Balé ou dança moderna, twist, jazz, sapateado.','4,8');">Balé ou dança moderna, twist, jazz, sapateado.</a></li>
+<li data-filtertext='Geral, Grega, flamenco, swing, dança do ventre.'><a href='#' onclick="carregaAtividade('Geral, Grega, flamenco, swing, dança do ventre.','4,5');">Geral, Grega, flamenco, swing, dança do ventre.</a></li>
+<li data-filtertext='Dança de salão, rápido.'><a href='#' onclick="carregaAtividade('Dança de salão, rápido.','5,5');">Dança de salão, rápido.</a></li>
+<li data-filtertext='Dança folclórica, geral.'><a href='#' onclick="carregaAtividade('Dança folclórica, geral.','4,5');">Dança folclórica, geral.</a></li>
+<li data-filtertext='Samba, pagode.'><a href='#' onclick="carregaAtividade('Samba, pagode.','3');">Samba, pagode.</a></li>
+<li data-filtertext='Dança de salão, devagar samba.'><a href='#' onclick="carregaAtividade('Dança de salão, devagar samba.','3');">Dança de salão, devagar samba.</a></li>
+
+						</ul>
+					</div>
+					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+						<h2>EXERCÍCIOS FÍSICOS</h2>
+						<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+							<h2>ACADEMIA</h2>
+							<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>AERÓBIOS</h2>
+									<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+										<h2>BICICLETA ERGOMÉTRICA</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+												<li data-role="list-divider">BICICLETA ERGOMÉTRICA<span class="ui-li-count">05</span></li>
+												<li data-filtertext='Esforço muito leve (50W).'><a href='#' onclick="carregaAtividade('Esforço muito leve (50W).','3');">Esforço muito leve (50W).</a></li>
+<li data-filtertext='Esforço leve (75 - 100W).'><a href='#' onclick="carregaAtividade('Esforço leve (75 - 100W).','5,5');">Esforço leve (75 - 100W).</a></li>
+<li data-filtertext='Esforço moderado (125 – 150W).'><a href='#' onclick="carregaAtividade('Esforço moderado (125 – 150W).','7');">Esforço moderado (125 – 150W).</a></li>
+<li data-filtertext='Esforço vigoroso (175 – 200W).'><a href='#' onclick="carregaAtividade('Esforço vigoroso (175 – 200W).','10,5');">Esforço vigoroso (175 – 200W).</a></li>
+<li data-filtertext='Esforço muito vigoroso (225 -250W).'><a href='#' onclick="carregaAtividade('Esforço muito vigoroso (225 -250W).','12,5');">Esforço muito vigoroso (225 -250W).</a></li>
+
+											</ul>
+									</div>
+									<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+										<h2>ESTEIRA</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+												<li data-role="list-divider">ESTEIRA<span class="ui-li-count">22</span></li>
+												<li data-filtertext='Jogging, estacionário.'><a href='#' onclick="carregaAtividade('Jogging, estacionário.','8');">Jogging, estacionário.</a></li>
+<li data-filtertext='Correr, esteira, 8 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 8 km/h.','8');">Correr, esteira, 8 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 8,3 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 8,3 km/h.','9');">Correr, esteira, 8,3 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 9,7 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 9,7 km/h.','10');">Correr, esteira, 9,7 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 10,7 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 10,7 km/h.','11');">Correr, esteira, 10,7 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 11,2 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 11,2 km/h.','11,5');">Correr, esteira, 11,2 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 12,0 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 12,0 km/h.','12,5');">Correr, esteira, 12,0 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 12,8 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 12,8 km/h.','13,5');">Correr, esteira, 12,8 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 13,8 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 13,8 km/h.','14');">Correr, esteira, 13,8 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 14,4 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 14,4 km/h.','15');">Correr, esteira, 14,4 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 16,0 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 16,0 km/h.','16');">Correr, esteira, 16,0 km/h.</a></li>
+<li data-filtertext='Correr, esteira, 17,5 km/h.'><a href='#' onclick="carregaAtividade('Correr, esteira, 17,5 km/h.','18');">Correr, esteira, 17,5 km/h.</a></li>
+<li data-filtertext='Caminhar, esteira, menos 3 km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira, menos 3 km/h.','2');">Caminhar, esteira, menos 3 km/h.</a></li>
+<li data-filtertext='Caminhar, esteira 3 km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira 3 km/h.','2,5');">Caminhar, esteira 3 km/h.</a></li>
+<li data-filtertext='Caminhar, esteira 4 km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira 4 km/h.','2,8');">Caminhar, esteira 4 km/h.</a></li>
+<li data-filtertext='Caminhar, esteira 4,5 km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira 4,5 km/h.','3');">Caminhar, esteira 4,5 km/h.</a></li>
+<li data-filtertext='Caminhar, esteira 5 km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira 5 km/h.','3,3');">Caminhar, esteira 5 km/h.</a></li>
+<li data-filtertext='Caminhar, esteira 5,5km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira 5,5km/h.','4');">Caminhar, esteira 5,5km/h.</a></li>
+<li data-filtertext='Caminhar, esteira 6 km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira 6 km/h.','4,5');">Caminhar, esteira 6 km/h.</a></li>
+<li data-filtertext='Caminhar, esteira 6, 5 km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira 6, 5 km/h.','5');">Caminhar, esteira 6, 5 km/h.</a></li>
+<li data-filtertext='Caminhar, esteira 7 km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira 7 km/h.','6,3');">Caminhar, esteira 7 km/h.</a></li>
+<li data-filtertext='Caminhar, esteira7, 5 km/h.'><a href='#' onclick="carregaAtividade('Caminhar, esteira7, 5 km/h.','8');">Caminhar, esteira7, 5 km/h.</a></li>
+
+											</ul>
+									</div>
+									<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+										<h2>ELÍPTICO</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+												<li data-role="list-divider">ELÍPTICO<span class="ui-li-count">04</span></li>
+												<li data-filtertext='Elíptico, 4,0 km/h (esforço leve, resistência 1-2).'><a href='#' onclick="carregaAtividade('Elíptico, 4,0 km/h (esforço leve, resistência 1-2).','7');">Elíptico, 4,0 km/h (esforço leve, resistência 1-2).</a></li>
+<li data-filtertext='Elíptico, 6,5a 8 km/h (esforço moderado, resistência 3-4).'><a href='#' onclick="carregaAtividade('Elíptico, 6,5a 8 km/h (esforço moderado, resistência 3-4).','8');">Elíptico, 6,5a 8 km/h (esforço moderado, resistência 3-4).</a></li>
+<li data-filtertext='Elíptico, 8,0 a 13 km/h (esforço vigoroso, resistência 5- 6).'><a href='#' onclick="carregaAtividade('Elíptico, 8,0 a 13 km/h (esforço vigoroso, resistência 5- 6).','9');">Elíptico, 8,0 a 13 km/h (esforço vigoroso, resistência 5- 6).</a></li>
+<li data-filtertext='Elíptico, acima de 13 km/h (esforço muito vigoroso, resistência 7 ou maior).'><a href='#' onclick="carregaAtividade('Elíptico, acima de 13 km/h (esforço muito vigoroso, resistência 7 ou maior).','14');">Elíptico, acima de 13 km/h (esforço muito vigoroso, resistência 7 ou maior).</a></li>
+
+											</ul>
+									</div>
+									<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+										<h2>PULAR CORDA</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+												<li data-role="list-divider">PULAR CORDA<span class="ui-li-count">03</span></li>
+												<li data-filtertext='Pular corda, velocidade rápida.'><a href='#' onclick="carregaAtividade('Pular corda, velocidade rápida.','12');">Pular corda, velocidade rápida.</a></li>
+<li data-filtertext='Pular corda, velocidade moderada geral.'><a href='#' onclick="carregaAtividade('Pular corda, velocidade moderada geral.','10');">Pular corda, velocidade moderada geral.</a></li>
+<li data-filtertext='Pular corda, velocidade lenta.'><a href='#' onclick="carregaAtividade('Pular corda, velocidade lenta.','8');">Pular corda, velocidade lenta.</a></li>
+
+											</ul>
+									</div>
+									<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+										<h2>REMO ESTACIONÁRIO</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+												<li data-role="list-divider">REMO ESTACIONÁRIO<span class="ui-li-count">04</span></li>
+												<li data-filtertext='Remo, estacionário, 50 W, esforço leve.'><a href='#' onclick="carregaAtividade('Remo, estacionário, 50 W, esforço leve.','3,5');">Remo, estacionário, 50 W, esforço leve.</a></li>
+<li data-filtertext='Remo, estacionário, 100 W, esforço moderado.'><a href='#' onclick="carregaAtividade('Remo, estacionário, 100 W, esforço moderado.','7');">Remo, estacionário, 100 W, esforço moderado.</a></li>
+<li data-filtertext='Remo, estacionário, 150 W, esforço vigoroso.'><a href='#' onclick="carregaAtividade('Remo, estacionário, 150 W, esforço vigoroso.','8,5');">Remo, estacionário, 150 W, esforço vigoroso.</a></li>
+<li data-filtertext='Remo, estacionário, 200 W, esforço muito vigoroso.'><a href='#' onclick="carregaAtividade('Remo, estacionário, 200 W, esforço muito vigoroso.','12');">Remo, estacionário, 200 W, esforço muito vigoroso.</a></li>
+
+
+											</ul>
+									</div>
+									
+									</ul>
+								
+							</div>
+							<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>ALONGAMENTOS</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">ALONGAMENTOS<span class="ui-li-count">04</span></li>
+											<li data-filtertext='Alongamento estático, passivo.'><a href='#' onclick="carregaAtividade('Alongamento estático, passivo.','1,2');">Alongamento estático, passivo.</a></li>
+<li data-filtertext='Alongamento estático, ativo.'><a href='#' onclick="carregaAtividade('Alongamento estático, ativo.','1,8');">Alongamento estático, ativo.</a></li>
+<li data-filtertext='Alongamento dinâmico, ativo.'><a href='#' onclick="carregaAtividade('Alongamento dinâmico, ativo.','2,5');">Alongamento dinâmico, ativo.</a></li>
+<li data-filtertext='Alongar outra pessoa.'><a href='#' onclick="carregaAtividade('Alongar outra pessoa.','2,5');">Alongar outra pessoa.</a></li>
+											</ul>
+										</div>
+							<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>GINÁSTICA COLETIVA</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">GINÁSTICA COLETIVA<span class="ui-li-count">08</span></li>
+											<li data-filtertext='Step, com step de 15-20cm.'><a href='#' onclick="carregaAtividade('Step, com step de 15-20cm.','8,5');">Step, com step de 15-20cm.</a></li>
+<li data-filtertext='Step, com step de 25-30cm.'><a href='#' onclick="carregaAtividade('Step, com step de 25-30cm.','10');">Step, com step de 25-30cm.</a></li>
+<li data-filtertext='Aeróbica, baixo impacto.'><a href='#' onclick="carregaAtividade('Aeróbica, baixo impacto.','5');">Aeróbica, baixo impacto.</a></li>
+<li data-filtertext='Aeróbica, alto impacto.'><a href='#' onclick="carregaAtividade('Aeróbica, alto impacto.','7');">Aeróbica, alto impacto.</a></li>
+<li data-filtertext='Jump, cama elástica, geral.'><a href='#' onclick="carregaAtividade('Jump, cama elástica, geral.','8,5');">Jump, cama elástica, geral.</a></li>
+<li data-filtertext='Localizada, calistênica, geral.'><a href='#' onclick="carregaAtividade('Localizada, calistênica, geral.','4');">Localizada, calistênica, geral.</a></li>
+<li data-filtertext='Yoga, geral.'><a href='#' onclick="carregaAtividade('Yoga, geral.','2,5');">Yoga, geral.</a></li>
+<li data-filtertext='Spinning, ciclismo indoor.'><a href='#' onclick="carregaAtividade('Spinning, ciclismo indoor.','7,5');">Spinning, ciclismo indoor.</a></li>
+
+											</ul>
+										</div>
+							<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>MUSCULAÇÃO</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">MUSCULAÇÃO<span class="ui-li-count">06</span></li>
+											<li data-filtertext='Musculação, geral.'><a href='#' onclick="carregaAtividade('Musculação, geral.','6');">Musculação, geral.</a></li>
+<li data-filtertext='Musculação, leve, resistência, geral (período ativo).'><a href='#' onclick="carregaAtividade('Musculação, leve, resistência, geral (período ativo).','4');">Musculação, leve, resistência, geral (período ativo).</a></li>
+<li data-filtertext='Musculação, hipertrofia, vigoroso, geral (período ativo).'><a href='#' onclick="carregaAtividade('Musculação, hipertrofia, vigoroso, geral (período ativo).','7');">Musculação, hipertrofia, vigoroso, geral (período ativo).</a></li>
+<li data-filtertext='Musculação, hipertrofia, exercícios livres, geral (período ativo).'><a href='#' onclick="carregaAtividade('Musculação, hipertrofia, exercícios livres, geral (período ativo).','8');">Musculação, hipertrofia, exercícios livres, geral (período ativo).</a></li>
+<li data-filtertext='Musculação, intervalos sentado (período inativo, recuperação)'><a href='#' onclick="carregaAtividade('Musculação, intervalos sentado (período inativo, recuperação)','2');">Musculação, intervalos sentado (período inativo, recuperação)</a></li>
+<li data-filtertext='Abdominais, flexões (período ativo).'><a href='#' onclick="carregaAtividade('Abdominais, flexões (período ativo).','4');">Abdominais, flexões (período ativo).</a></li>
+
+											</ul>
+										</div>
+							<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>PILATES</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">PILATES<span class="ui-li-count">03</span></li>
+											<li data-filtertext='Pilates, geral.'><a href='#' onclick="carregaAtividade('Pilates, geral.','4');">Pilates, geral.</a></li>
+<li data-filtertext='Pilates, em equipamentos.'><a href='#' onclick="carregaAtividade('Pilates, em equipamentos.','3');">Pilates, em equipamentos.</a></li>
+<li data-filtertext='Pilates, livre, solo, bola.'><a href='#' onclick="carregaAtividade('Pilates, livre, solo, bola.','6');">Pilates, livre, solo, bola.</a></li>
+											</ul>
+										</div>
+							</ul>
+						</div>
+						<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>ATIVIDADES AQUÁTICAS</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">ATIVIDADES AQUÁTICAS<span class="ui-li-count">30</span></li>
+											<li data-filtertext='Conduzir barco a motor.'><a href='#' onclick="carregaAtividade('Conduzir barco a motor.','2,5');">Conduzir barco a motor.</a></li>
+<li data-filtertext='Canoagem, esforço leve.'><a href='#' onclick="carregaAtividade('Canoagem, esforço leve.','3');">Canoagem, esforço leve.</a></li>
+<li data-filtertext='Canoagem, esforço moderado.'><a href='#' onclick="carregaAtividade('Canoagem, esforço moderado.','7');">Canoagem, esforço moderado.</a></li>
+<li data-filtertext='Canoagem, esforço vigoroso.'><a href='#' onclick="carregaAtividade('Canoagem, esforço vigoroso.','12');">Canoagem, esforço vigoroso.</a></li>
+<li data-filtertext='Mergulhar, da costa ou de plataforma.'><a href='#' onclick="carregaAtividade('Mergulhar, da costa ou de plataforma.','3');">Mergulhar, da costa ou de plataforma.</a></li>
+<li data-filtertext='Remar em caiaque.'><a href='#' onclick="carregaAtividade('Remar em caiaque.','5');">Remar em caiaque.</a></li>
+<li data-filtertext='Conduzir barco a pedal (pedalinho).'><a href='#' onclick="carregaAtividade('Conduzir barco a pedal (pedalinho).','4');">Conduzir barco a pedal (pedalinho).</a></li>
+<li data-filtertext='Windsurfe.'><a href='#' onclick="carregaAtividade('Windsurfe.','3');">Windsurfe.</a></li>
+<li data-filtertext='Velejar, em competição.'><a href='#' onclick="carregaAtividade('Velejar, em competição.','5');">Velejar, em competição.</a></li>
+<li data-filtertext='Iatismo, velejar em oceano.'><a href='#' onclick="carregaAtividade('Iatismo, velejar em oceano.','3');">Iatismo, velejar em oceano.</a></li>
+<li data-filtertext='Esqui aquático.'><a href='#' onclick="carregaAtividade('Esqui aquático.','6');">Esqui aquático.</a></li>
+<li data-filtertext='Mergulho livre (Skindiving), rápido.'><a href='#' onclick="carregaAtividade('Mergulho livre (Skindiving), rápido.','16');">Mergulho livre (Skindiving), rápido.</a></li>
+<li data-filtertext='Mergulho livre (Skindiving), moderado.'><a href='#' onclick="carregaAtividade('Mergulho livre (Skindiving), moderado.','12,5');">Mergulho livre (Skindiving), moderado.</a></li>
+<li data-filtertext='Mergulho (com garrafa), geral.'><a href='#' onclick="carregaAtividade('Mergulho (com garrafa), geral.','7');">Mergulho (com garrafa), geral.</a></li>
+<li data-filtertext='Mergulhar com snorckel (sem garrafas).'><a href='#' onclick="carregaAtividade('Mergulhar com snorckel (sem garrafas).','5');">Mergulhar com snorckel (sem garrafas).</a></li>
+<li data-filtertext='Surfe, bodyboard.'><a href='#' onclick="carregaAtividade('Surfe, bodyboard.','3');">Surfe, bodyboard.</a></li>
+<li data-filtertext='Nadar, estilo livre, esforço leve.'><a href='#' onclick="carregaAtividade('Nadar, estilo livre, esforço leve.','7');">Nadar, estilo livre, esforço leve.</a></li>
+<li data-filtertext='Nadar, costas, geral.'><a href='#' onclick="carregaAtividade('Nadar, costas, geral.','7');">Nadar, costas, geral.</a></li>
+<li data-filtertext='Nadar, peito, geral.'><a href='#' onclick="carregaAtividade('Nadar, peito, geral.','10');">Nadar, peito, geral.</a></li>
+<li data-filtertext='Nadar, borboleta, geral.'><a href='#' onclick="carregaAtividade('Nadar, borboleta, geral.','11');">Nadar, borboleta, geral.</a></li>
+<li data-filtertext='Nadar, crawl, velocidade rápida (70m/min), esforço vigoroso.'><a href='#' onclick="carregaAtividade('Nadar, crawl, velocidade rápida (70m/min), esforço vigoroso.','11');">Nadar, crawl, velocidade rápida (70m/min), esforço vigoroso.</a></li>
+<li data-filtertext='Nadar, crawl, velocidade lenta (45-46m/min), esforço leve a moderado.'><a href='#' onclick="carregaAtividade('Nadar, crawl, velocidade lenta (45-46m/min), esforço leve a moderado.','8');">Nadar, crawl, velocidade lenta (45-46m/min), esforço leve a moderado.</a></li>
+<li data-filtertext='Nadar por lazer, geral.'><a href='#' onclick="carregaAtividade('Nadar por lazer, geral.','6');">Nadar por lazer, geral.</a></li>
+<li data-filtertext='Nado sincronizado.'><a href='#' onclick="carregaAtividade('Nado sincronizado.','8');">Nado sincronizado.</a></li>
+<li data-filtertext='Andar (caminhar) na água, velocidade rápida.'><a href='#' onclick="carregaAtividade('Andar (caminhar) na água, velocidade rápida.','10');">Andar (caminhar) na água, velocidade rápida.</a></li>
+<li data-filtertext='Andar (caminhar) na água, velocidade lenta.'><a href='#' onclick="carregaAtividade('Andar (caminhar) na água, velocidade lenta.','4');">Andar (caminhar) na água, velocidade lenta.</a></li>
+<li data-filtertext='Hidroginástica.'><a href='#' onclick="carregaAtividade('Hidroginástica.','4');">Hidroginástica.</a></li>
+<li data-filtertext='Polo aquático.'><a href='#' onclick="carregaAtividade('Polo aquático.','10');">Polo aquático.</a></li>
+<li data-filtertext='Voleibol na água'><a href='#' onclick="carregaAtividade('Voleibol na água','3');">Voleibol na água</a></li>
+<li data-filtertext='Rafting.'><a href='#' onclick="carregaAtividade('Rafting.','5');">Rafting.</a></li>
+											</ul>
+										</div>
+						<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>CAMINHADA</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">CAMINHADA<span class="ui-li-count">13</span></li>
+											<li data-filtertext='Caminhar usando muletas ou bengalas.'><a href='#' onclick="carregaAtividade('Caminhar usando muletas ou bengalas.','5');">Caminhar usando muletas ou bengalas.</a></li>
+<li data-filtertext='Caminhar, andar em casa.'><a href='#' onclick="carregaAtividade('Caminhar, andar em casa.','2');">Caminhar, andar em casa.</a></li>
+<li data-filtertext='Caminhar de modo confortável, bem devagar.'><a href='#' onclick="carregaAtividade('Caminhar de modo confortável, bem devagar.','2,5');">Caminhar de modo confortável, bem devagar.</a></li>
+<li data-filtertext='Caminhar da casa para o trabalho.'><a href='#' onclick="carregaAtividade('Caminhar da casa para o trabalho.','3,5');">Caminhar da casa para o trabalho.</a></li>
+<li data-filtertext='Caminhar com o cachorro.'><a href='#' onclick="carregaAtividade('Caminhar com o cachorro.','3');">Caminhar com o cachorro.</a></li>
+<li data-filtertext='Caminhar, descendo encosta, moderado.'><a href='#' onclick="carregaAtividade('Caminhar, descendo encosta, moderado.','3');">Caminhar, descendo encosta, moderado.</a></li>
+<li data-filtertext='Caminhar, ritmo moderado.'><a href='#' onclick="carregaAtividade('Caminhar, ritmo moderado.','3,5');">Caminhar, ritmo moderado.</a></li>
+<li data-filtertext='Caminhar, para exercitar-se, ritmo rápido.'><a href='#' onclick="carregaAtividade('Caminhar, para exercitar-se, ritmo rápido.','3,8');">Caminhar, para exercitar-se, ritmo rápido.</a></li>
+<li data-filtertext='Caminhar, ritmo muito rápido (6,5 km/h).'><a href='#' onclick="carregaAtividade('Caminhar, ritmo muito rápido (6,5 km/h).','5');">Caminhar, ritmo muito rápido (6,5 km/h).</a></li>
+<li data-filtertext='Caminhar, ritmo extremamente rápido.'><a href='#' onclick="carregaAtividade('Caminhar, ritmo extremamente rápido.','6,3');">Caminhar, ritmo extremamente rápido.</a></li>
+<li data-filtertext='Caminhar, subindo encosta ou escada.'><a href='#' onclick="carregaAtividade('Caminhar, subindo encosta ou escada.','6');">Caminhar, subindo encosta ou escada.</a></li>
+<li data-filtertext='Caminhar em terreno gramado.'><a href='#' onclick="carregaAtividade('Caminhar em terreno gramado.','5');">Caminhar em terreno gramado.</a></li>
+<li data-filtertext='Caminhar para o trabalho ou aula.'><a href='#' onclick="carregaAtividade('Caminhar para o trabalho ou aula.','4');">Caminhar para o trabalho ou aula.</a></li>
+											</ul>
+										</div>
+						<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>ESPORTES</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">ESPORTES<span class="ui-li-count">69</span></li>
+											<li data-filtertext='Badminton, competitivo.'><a href='#' onclick="carregaAtividade('Badminton, competitivo.','7');">Badminton, competitivo.</a></li>
+<li data-filtertext='Badminton, geral.'><a href='#' onclick="carregaAtividade('Badminton, geral.','4,5');">Badminton, geral.</a></li>
+<li data-filtertext='Basquetebol, jogo.'><a href='#' onclick="carregaAtividade('Basquetebol, jogo.','8');">Basquetebol, jogo.</a></li>
+<li data-filtertext='Basquetebol, lazer, geral.'><a href='#' onclick="carregaAtividade('Basquetebol, lazer, geral.','6');">Basquetebol, lazer, geral.</a></li>
+<li data-filtertext='Basquetebol, treino.'><a href='#' onclick="carregaAtividade('Basquetebol, treino.','4');">Basquetebol, treino.</a></li>
+<li data-filtertext='Basquetebol, em cadeiras de roda.'><a href='#' onclick="carregaAtividade('Basquetebol, em cadeiras de roda.','6,5');">Basquetebol, em cadeiras de roda.</a></li>
+<li data-filtertext='Bilhar (Sinuca).'><a href='#' onclick="carregaAtividade('Bilhar (Sinuca).','2,5');">Bilhar (Sinuca).</a></li>
+<li data-filtertext='Boliche.'><a href='#' onclick="carregaAtividade('Boliche.','3');">Boliche.</a></li>
+<li data-filtertext='Boxe, no ringue, em geral.'><a href='#' onclick="carregaAtividade('Boxe, no ringue, em geral.','12');">Boxe, no ringue, em geral.</a></li>
+<li data-filtertext='Boxe, treino.'><a href='#' onclick="carregaAtividade('Boxe, treino.','6');">Boxe, treino.</a></li>
+<li data-filtertext='Boxe, sparring (lutador auxiliar).'><a href='#' onclick="carregaAtividade('Boxe, sparring (lutador auxiliar).','9');">Boxe, sparring (lutador auxiliar).</a></li>
+<li data-filtertext='Jogos infantis (amarelinha, queimada, brinquedos de playground, outros).'><a href='#' onclick="carregaAtividade('Jogos infantis (amarelinha, queimada, brinquedos de playground, outros).','5');">Jogos infantis (amarelinha, queimada, brinquedos de playground, outros).</a></li>
+<li data-filtertext='Treinar: futebol americano, futebol, basquetebol, beisebol, natação, etc.'><a href='#' onclick="carregaAtividade('Treinar: futebol americano, futebol, basquetebol, beisebol, natação, etc.','4');">Treinar: futebol americano, futebol, basquetebol, beisebol, natação, etc.</a></li>
+<li data-filtertext='Críquete (rebater, lançar).'><a href='#' onclick="carregaAtividade('Críquete (rebater, lançar).','5');">Críquete (rebater, lançar).</a></li>
+<li data-filtertext='Curling.'><a href='#' onclick="carregaAtividade('Curling.','4');">Curling.</a></li>
+<li data-filtertext='Dardo, na parede ou gramado.'><a href='#' onclick="carregaAtividade('Dardo, na parede ou gramado.','2,5');">Dardo, na parede ou gramado.</a></li>
+<li data-filtertext='Corrida de carreta, empurrar ou dirigir carros.'><a href='#' onclick="carregaAtividade('Corrida de carreta, empurrar ou dirigir carros.','6');">Corrida de carreta, empurrar ou dirigir carros.</a></li>
+<li data-filtertext='Esgrima.'><a href='#' onclick="carregaAtividade('Esgrima.','6');">Esgrima.</a></li>
+<li data-filtertext='Futebol americano, competitivo.'><a href='#' onclick="carregaAtividade('Futebol americano, competitivo.','9');">Futebol americano, competitivo.</a></li>
+<li data-filtertext='Futebol americano, geral.'><a href='#' onclick="carregaAtividade('Futebol americano, geral.','8');">Futebol americano, geral.</a></li>
+<li data-filtertext='Futebol americano ou beisebol, arremesso e pegada.'><a href='#' onclick="carregaAtividade('Futebol americano ou beisebol, arremesso e pegada.','2,5');">Futebol americano ou beisebol, arremesso e pegada.</a></li>
+<li data-filtertext='Frisbee, em geral.'><a href='#' onclick="carregaAtividade('Frisbee, em geral.','4');">Frisbee, em geral.</a></li>
+<li data-filtertext='Golfe, geral.'><a href='#' onclick="carregaAtividade('Golfe, geral.','4,5');">Golfe, geral.</a></li>
+<li data-filtertext='Golfe, caminhando e transportando tacos.'><a href='#' onclick="carregaAtividade('Golfe, caminhando e transportando tacos.','4,5');">Golfe, caminhando e transportando tacos.</a></li>
+<li data-filtertext='Golfe, miniatura.'><a href='#' onclick="carregaAtividade('Golfe, miniatura.','3');">Golfe, miniatura.</a></li>
+<li data-filtertext='Golfe, usando carrinhos elétricos.'><a href='#' onclick="carregaAtividade('Golfe, usando carrinhos elétricos.','3,5');">Golfe, usando carrinhos elétricos.</a></li>
+<li data-filtertext='Ginástica artística e rítmica, geral.'><a href='#' onclick="carregaAtividade('Ginástica artística e rítmica, geral.','5,5');">Ginástica artística e rítmica, geral.</a></li>
+<li data-filtertext='Hacky sack, embaixadas. '><a href='#' onclick="carregaAtividade('Hacky sack, embaixadas. ','4');">Hacky sack, embaixadas. </a></li>
+<li data-filtertext='Handebol, geral.'><a href='#' onclick="carregaAtividade('Handebol, geral.','12');">Handebol, geral.</a></li>
+<li data-filtertext='Handebol, meia-quadra.'><a href='#' onclick="carregaAtividade('Handebol, meia-quadra.','8');">Handebol, meia-quadra.</a></li>
+<li data-filtertext='Praticar voo livre (asa delta).'><a href='#' onclick="carregaAtividade('Praticar voo livre (asa delta).','3,5');">Praticar voo livre (asa delta).</a></li>
+<li data-filtertext='Hóquei, de campo.'><a href='#' onclick="carregaAtividade('Hóquei, de campo.','8');">Hóquei, de campo.</a></li>
+<li data-filtertext='Hóquei, no gelo.'><a href='#' onclick="carregaAtividade('Hóquei, no gelo.','8');">Hóquei, no gelo.</a></li>
+<li data-filtertext='Cavalgar, geral.'><a href='#' onclick="carregaAtividade('Cavalgar, geral.','5');">Cavalgar, geral.</a></li>
+<li data-filtertext='Cavalgar, selar e cuidas de cavalo.'><a href='#' onclick="carregaAtividade('Cavalgar, selar e cuidas de cavalo.','3,5');">Cavalgar, selar e cuidas de cavalo.</a></li>
+<li data-filtertext='Cavalgar, passeando.'><a href='#' onclick="carregaAtividade('Cavalgar, passeando.','2,5');">Cavalgar, passeando.</a></li>
+<li data-filtertext='Jai alai.'><a href='#' onclick="carregaAtividade('Jai alai.','12');">Jai alai.</a></li>
+<li data-filtertext='Judô, Jiu-jitsu. '><a href='#' onclick="carregaAtividade('Judô, Jiu-jitsu. ','9');">Judô, Jiu-jitsu. </a></li>
+<li data-filtertext='Karate, kick boxing, tae-kwon-do.'><a href='#' onclick="carregaAtividade('Karate, kick boxing, tae-kwon-do.','10');">Karate, kick boxing, tae-kwon-do.</a></li>
+<li data-filtertext='Malabarismo (com as mãos).'><a href='#' onclick="carregaAtividade('Malabarismo (com as mãos).','4');">Malabarismo (com as mãos).</a></li>
+<li data-filtertext='Lacrosse.'><a href='#' onclick="carregaAtividade('Lacrosse.','8');">Lacrosse.</a></li>
+<li data-filtertext='Motocross.'><a href='#' onclick="carregaAtividade('Motocross.','4');">Motocross.</a></li>
+<li data-filtertext='Corrida de orientação.'><a href='#' onclick="carregaAtividade('Corrida de orientação.','9');">Corrida de orientação.</a></li>
+<li data-filtertext='Polo.'><a href='#' onclick="carregaAtividade('Polo.','8');">Polo.</a></li>
+<li data-filtertext='Escalada, subir rochas.'><a href='#' onclick="carregaAtividade('Escalada, subir rochas.','9');">Escalada, subir rochas.</a></li>
+<li data-filtertext='Rapel.'><a href='#' onclick="carregaAtividade('Rapel.','4');">Rapel.</a></li>
+<li data-filtertext='Rúgbi.'><a href='#' onclick="carregaAtividade('Rúgbi.','10');">Rúgbi.</a></li>
+<li data-filtertext='Andar de skate.'><a href='#' onclick="carregaAtividade('Andar de skate.','5');">Andar de skate.</a></li>
+<li data-filtertext='Patinação, geral'><a href='#' onclick="carregaAtividade('Patinação, geral','7');">Patinação, geral</a></li>
+<li data-filtertext='Patinação, patins em linha.'><a href='#' onclick="carregaAtividade('Patinação, patins em linha.','12,5');">Patinação, patins em linha.</a></li>
+<li data-filtertext='Saltar de paraquedas.'><a href='#' onclick="carregaAtividade('Saltar de paraquedas.','3,5');">Saltar de paraquedas.</a></li>
+<li data-filtertext='Futebol competitivo.'><a href='#' onclick="carregaAtividade('Futebol competitivo.','10');">Futebol competitivo.</a></li>
+<li data-filtertext='Futebol casual, geral.'><a href='#' onclick="carregaAtividade('Futebol casual, geral.','7');">Futebol casual, geral.</a></li>
+<li data-filtertext='Futebol, treino.'><a href='#' onclick="carregaAtividade('Futebol, treino.','5');">Futebol, treino.</a></li>
+<li data-filtertext='Softball ou beisebol, geral.'><a href='#' onclick="carregaAtividade('Softball ou beisebol, geral.','5');">Softball ou beisebol, geral.</a></li>
+<li data-filtertext='Squash.'><a href='#' onclick="carregaAtividade('Squash.','12');">Squash.</a></li>
+<li data-filtertext='Tênis de mesa, pingue-pongue.'><a href='#' onclick="carregaAtividade('Tênis de mesa, pingue-pongue.','4');">Tênis de mesa, pingue-pongue.</a></li>
+<li data-filtertext='Tai chi chuan.'><a href='#' onclick="carregaAtividade('Tai chi chuan.','4');">Tai chi chuan.</a></li>
+<li data-filtertext='Tênis, geral.'><a href='#' onclick="carregaAtividade('Tênis, geral.','7');">Tênis, geral.</a></li>
+<li data-filtertext='Tênis, duplas.'><a href='#' onclick="carregaAtividade('Tênis, duplas.','6');">Tênis, duplas.</a></li>
+<li data-filtertext='Tênis, simples.'><a href='#' onclick="carregaAtividade('Tênis, simples.','8');">Tênis, simples.</a></li>
+<li data-filtertext='Trampolim.'><a href='#' onclick="carregaAtividade('Trampolim.','3,5');">Trampolim.</a></li>
+<li data-filtertext='Voleibol.'><a href='#' onclick="carregaAtividade('Voleibol.','4');">Voleibol.</a></li>
+<li data-filtertext='Voleibol, treino.'><a href='#' onclick="carregaAtividade('Voleibol, treino.','4');">Voleibol, treino.</a></li>
+<li data-filtertext='Voleibol de praia.'><a href='#' onclick="carregaAtividade('Voleibol de praia.','8');">Voleibol de praia.</a></li>
+<li data-filtertext='Luta romana.'><a href='#' onclick="carregaAtividade('Luta romana.','6');">Luta romana.</a></li>
+<li data-filtertext='Atletismo (peso, disco, martelo).'><a href='#' onclick="carregaAtividade('Atletismo (peso, disco, martelo).','4');">Atletismo (peso, disco, martelo).</a></li>
+<li data-filtertext='Atletismo (salto em altura, distância e triplo, dardo, salto com vara).'><a href='#' onclick="carregaAtividade('Atletismo (salto em altura, distância e triplo, dardo, salto com vara).','6');">Atletismo (salto em altura, distância e triplo, dardo, salto com vara).</a></li>
+<li data-filtertext='Atletismo (obstáculos, barreiras).'><a href='#' onclick="carregaAtividade('Atletismo (obstáculos, barreiras).','10');">Atletismo (obstáculos, barreiras).</a></li>
+											</ul>
+										</div>
+						<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>CICLISMO</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">CICLISMO<span class="ui-li-count">10</span></li>
+											<li data-filtertext='Ciclismo, BMX ou Downhill.'><a href='#' onclick="carregaAtividade('Ciclismo, BMX ou Downhill.','8,5');">Ciclismo, BMX ou Downhill.</a></li>
+<li data-filtertext='Ciclismo, lazer, para trabalho ou prazer.'><a href='#' onclick="carregaAtividade('Ciclismo, lazer, para trabalho ou prazer.','4');">Ciclismo, lazer, para trabalho ou prazer.</a></li>
+<li data-filtertext='Ciclismo, geral.'><a href='#' onclick="carregaAtividade('Ciclismo, geral.','8');">Ciclismo, geral.</a></li>
+<li data-filtertext='Ciclismo, 16 a 19 km/h, lazer, esforço leve.'><a href='#' onclick="carregaAtividade('Ciclismo, 16 a 19 km/h, lazer, esforço leve.','6');">Ciclismo, 16 a 19 km/h, lazer, esforço leve.</a></li>
+<li data-filtertext='Ciclismo, 19 a 22 km/h, lazer, esforço moderado.'><a href='#' onclick="carregaAtividade('Ciclismo, 19 a 22 km/h, lazer, esforço moderado.','8');">Ciclismo, 19 a 22 km/h, lazer, esforço moderado.</a></li>
+<li data-filtertext='Ciclismo, 22 a 25 km/h, competição ou lazer, esforço vigoroso.'><a href='#' onclick="carregaAtividade('Ciclismo, 22 a 25 km/h, competição ou lazer, esforço vigoroso.','10');">Ciclismo, 22 a 25 km/h, competição ou lazer, esforço vigoroso.</a></li>
+<li data-filtertext='Ciclismo, 25 a 30 km/h, competição em geral.'><a href='#' onclick="carregaAtividade('Ciclismo, 25 a 30 km/h, competição em geral.','12');">Ciclismo, 25 a 30 km/h, competição em geral.</a></li>
+<li data-filtertext='Ciclismo, acima de 30 km/h, explosivo, muito veloz.'><a href='#' onclick="carregaAtividade('Ciclismo, acima de 30 km/h, explosivo, muito veloz.','12');">Ciclismo, acima de 30 km/h, explosivo, muito veloz.</a></li>
+<li data-filtertext='Ciclismo, > 32 km/h, competição, sem explosão.'><a href='#' onclick="carregaAtividade('Ciclismo, > 32 km/h, competição, sem explosão.','16');">Ciclismo, > 32 km/h, competição, sem explosão.</a></li>
+<li data-filtertext='Ciclismo, pedalando monociclo.'><a href='#' onclick="carregaAtividade('Ciclismo, pedalando monociclo.','5');">Ciclismo, pedalando monociclo.</a></li>
+
+											</ul>
+										</div>
+						<div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>CORRIDA</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">CORRIDA<span class="ui-li-count">10</span></li>
+											<li data-filtertext='Correr, terrenos irregulares (cross-country).'><a href='#' onclick="carregaAtividade('Correr, terrenos irregulares (cross-country).','9');">Correr, terrenos irregulares (cross-country).</a></li>
+<li data-filtertext='Correr, subir rampa ou escada.'><a href='#' onclick="carregaAtividade('Correr, subir rampa ou escada.','15');">Correr, subir rampa ou escada.</a></li>
+<li data-filtertext='Correr, treinamento, empurrar cadeira de roda em situação competitiva.'><a href='#' onclick="carregaAtividade('Correr, treinamento, empurrar cadeira de roda em situação competitiva.','8');">Correr, treinamento, empurrar cadeira de roda em situação competitiva.</a></li>
+<li data-filtertext='Jogging em geral'><a href='#' onclick="carregaAtividade('Jogging em geral','7');">Jogging em geral</a></li>
+<li data-filtertext='Corrida de rua, 7,5 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 7,5 min/km.','8');">Corrida de rua, 7,5 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 7,1 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 7,1 min/km.','9');">Corrida de rua, 7,1 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 6,2 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 6,2 min/km.','10');">Corrida de rua, 6,2 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 5,6 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 5,6 min/km.','11');">Corrida de rua, 5,6 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 5,3 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 5,3 min/km.','11,5');">Corrida de rua, 5,3 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 5,0 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 5,0 min/km.','12,5');">Corrida de rua, 5,0 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 4,6 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 4,6 min/km.','13,5');">Corrida de rua, 4,6 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 4,3 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 4,3 min/km.','14');">Corrida de rua, 4,3 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 4,0 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 4,0 min/km.','15');">Corrida de rua, 4,0 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 3,7 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 3,7 min/km.','16');">Corrida de rua, 3,7 min/km.</a></li>
+<li data-filtertext='Corrida de rua, 3,4 min/km.'><a href='#' onclick="carregaAtividade('Corrida de rua, 3,4 min/km.','18');">Corrida de rua, 3,4 min/km.</a></li>
+
+											</ul>
+										</div>
+					</div>
+					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>INATIVIDADE</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">INATIVIDADE<span class="ui-li-count">09</span></li>
+											<li data-filtertext='Ficar assistindo televisão.'><a href='#' onclick="carregaAtividade('Ficar assistindo televisão.','1');">Ficar assistindo televisão.</a></li>
+<li data-filtertext='Ficar deitado e quieto, fazendo nada, deitado na cama acordado, escutando música (sem falar ou ler).'><a href='#' onclick="carregaAtividade('Ficar deitado e quieto, fazendo nada, deitado na cama acordado, escutando música (sem falar ou ler).','1');">Ficar deitado e quieto, fazendo nada, deitado na cama acordado, escutando música (sem falar ou ler).</a></li>
+<li data-filtertext='Sentado e quieto.'><a href='#' onclick="carregaAtividade('Sentado e quieto.','1');">Sentado e quieto.</a></li>
+<li data-filtertext='Dormir.'><a href='#' onclick="carregaAtividade('Dormir.','0,9');">Dormir.</a></li>
+<li data-filtertext='De pé, quieto (esperar numa fila).'><a href='#' onclick="carregaAtividade('De pé, quieto (esperar numa fila).','1,5');">De pé, quieto (esperar numa fila).</a></li>
+<li data-filtertext='Escrevendo.'><a href='#' onclick="carregaAtividade('Escrevendo.','1,1');">Escrevendo.</a></li>
+<li data-filtertext='Falando ao telefone.'><a href='#' onclick="carregaAtividade('Falando ao telefone.','1,2');">Falando ao telefone.</a></li>
+<li data-filtertext='Ler, estudar, assistir aula.'><a href='#' onclick="carregaAtividade('Ler, estudar, assistir aula.','1,5');">Ler, estudar, assistir aula.</a></li>
+<li data-filtertext='Meditando.'><a href='#' onclick="carregaAtividade('Meditando.','1');">Meditando.</a></li>
+
+											</ul>
+										</div>
+					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>MISCELÂNIA</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">MISCELÂNIA<span class="ui-li-count">22</span></li>
+											<li data-filtertext='Jogar cartas ou jogos de mesa.'><a href='#' onclick="carregaAtividade('Jogar cartas ou jogos de mesa.','1,5');">Jogar cartas ou jogos de mesa.</a></li>
+<li data-filtertext='De pé, desenhando (escrevendo), jogando em cassinos, operando máquinas copiadoras.'><a href='#' onclick="carregaAtividade('De pé, desenhando (escrevendo), jogando em cassinos, operando máquinas copiadoras.','2,3');">De pé, desenhando (escrevendo), jogando em cassinos, operando máquinas copiadoras.</a></li>
+<li data-filtertext='Trabalho de escritório, computador.'><a href='#' onclick="carregaAtividade('Trabalho de escritório, computador.','1,5');">Trabalho de escritório, computador.</a></li>
+<li data-filtertext='Sentado em sala de aula, geral, incluindo tomar notar e discussões em classe.'><a href='#' onclick="carregaAtividade('Sentado em sala de aula, geral, incluindo tomar notar e discussões em classe.','1,5');">Sentado em sala de aula, geral, incluindo tomar notar e discussões em classe.</a></li>
+<li data-filtertext='De pé, lendo.'><a href='#' onclick="carregaAtividade('De pé, lendo.','1,5');">De pé, lendo.</a></li>
+<li data-filtertext='Arte e artesanato, esforço leve.'><a href='#' onclick="carregaAtividade('Arte e artesanato, esforço leve.','1,5');">Arte e artesanato, esforço leve.</a></li>
+<li data-filtertext='Artes e artesanatos, esforço moderado.'><a href='#' onclick="carregaAtividade('Artes e artesanatos, esforço moderado.','2');">Artes e artesanatos, esforço moderado.</a></li>
+<li data-filtertext='Artes e artesanatos, esforço vigoroso.'><a href='#' onclick="carregaAtividade('Artes e artesanatos, esforço vigoroso.','3,5');">Artes e artesanatos, esforço vigoroso.</a></li>
+<li data-filtertext='Reunião familiar.'><a href='#' onclick="carregaAtividade('Reunião familiar.','1,5');">Reunião familiar.</a></li>
+<li data-filtertext='Acampar, geral.'><a href='#' onclick="carregaAtividade('Acampar, geral.','2,5');">Acampar, geral.</a></li>
+<li data-filtertext='Sentado em evento desportivo, como espectador.'><a href='#' onclick="carregaAtividade('Sentado em evento desportivo, como espectador.','1,5');">Sentado em evento desportivo, como espectador.</a></li>
+<li data-filtertext='Carregar criança em terreno plano ou em descidas.'><a href='#' onclick="carregaAtividade('Carregar criança em terreno plano ou em descidas.','3,5');">Carregar criança em terreno plano ou em descidas.</a></li>
+<li data-filtertext='Carregar carga em subidas, geral.'><a href='#' onclick="carregaAtividade('Carregar carga em subidas, geral.','6,5');">Carregar carga em subidas, geral.</a></li>
+<li data-filtertext='Carregando ou descarregando o carro.'><a href='#' onclick="carregaAtividade('Carregando ou descarregando o carro.','3');">Carregando ou descarregando o carro.</a></li>
+<li data-filtertext='Subir encostas com carga.'><a href='#' onclick="carregaAtividade('Subir encostas com carga.','8');">Subir encostas com carga.</a></li>
+<li data-filtertext='Descer encostas e escadas.'><a href='#' onclick="carregaAtividade('Descer encostas e escadas.','3');">Descer encostas e escadas.</a></li>
+<li data-filtertext='Caminhadas longas em trilhas ou florestas (hiking, trekking).'><a href='#' onclick="carregaAtividade('Caminhadas longas em trilhas ou florestas (hiking, trekking).','6');">Caminhadas longas em trilhas ou florestas (hiking, trekking).</a></li>
+<li data-filtertext='Observar pássaros.'><a href='#' onclick="carregaAtividade('Observar pássaros.','2,5');">Observar pássaros.</a></li>
+<li data-filtertext='Marchar, de forma marcial.'><a href='#' onclick="carregaAtividade('Marchar, de forma marcial.','6,5');">Marchar, de forma marcial.</a></li>
+<li data-filtertext='Empurrar ou puxar carrinho de bebê com criança.'><a href='#' onclick="carregaAtividade('Empurrar ou puxar carrinho de bebê com criança.','2,5');">Empurrar ou puxar carrinho de bebê com criança.</a></li>
+<li data-filtertext='Empurrando a cadeira de rodas, em contexto não ocupacional.'><a href='#' onclick="carregaAtividade('Empurrando a cadeira de rodas, em contexto não ocupacional.','4');">Empurrando a cadeira de rodas, em contexto não ocupacional.</a></li>
+<li data-filtertext='Subir escadas de mão.'><a href='#' onclick="carregaAtividade('Subir escadas de mão.','8');">Subir escadas de mão.</a></li>
+
+											</ul>
+										</div>
+					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+								<h2>MÚSICA</h2>
+											<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d" data-filter-placeholder="Buscar atividade...">
+											<li data-role="list-divider">MÚSICA<span class="ui-li-count">13</span></li>
+											<li data-filtertext='Acordeão, sanfona.'><a href='#' onclick="carregaAtividade('Acordeão, sanfona.','1,8');">Acordeão, sanfona.</a></li>
+<li data-filtertext='Violoncelo.'><a href='#' onclick="carregaAtividade('Violoncelo.','2');">Violoncelo.</a></li>
+<li data-filtertext='Regência.'><a href='#' onclick="carregaAtividade('Regência.','2,5');">Regência.</a></li>
+<li data-filtertext='Bateria.'><a href='#' onclick="carregaAtividade('Bateria.','4');">Bateria.</a></li>
+<li data-filtertext='Flauta (sentado).'><a href='#' onclick="carregaAtividade('Flauta (sentado).','2');">Flauta (sentado).</a></li>
+<li data-filtertext='Corneta.'><a href='#' onclick="carregaAtividade('Corneta.','2');">Corneta.</a></li>
+<li data-filtertext='Piano ou órgão.'><a href='#' onclick="carregaAtividade('Piano ou órgão.','2,5');">Piano ou órgão.</a></li>
+<li data-filtertext='Trombone.'><a href='#' onclick="carregaAtividade('Trombone.','3,5');">Trombone.</a></li>
+<li data-filtertext='Trompete.'><a href='#' onclick="carregaAtividade('Trompete.','2,5');">Trompete.</a></li>
+<li data-filtertext='Violino.'><a href='#' onclick="carregaAtividade('Violino.','2,5');">Violino.</a></li>
+<li data-filtertext='Violão, sentado.'><a href='#' onclick="carregaAtividade('Violão, sentado.','2');">Violão, sentado.</a></li>
+<li data-filtertext='Guitarra, banda de rock (em pé).'><a href='#' onclick="carregaAtividade('Guitarra, banda de rock (em pé).','3');">Guitarra, banda de rock (em pé).</a></li>
+<li data-filtertext='Fanfarra, percussão (andando).'><a href='#' onclick="carregaAtividade('Fanfarra, percussão (andando).','3,5');">Fanfarra, percussão (andando).</a></li>
+
+											</ul>
+										</div>
+			</div><!--/content-primary -->	
+		</div>	
+		
+		<div data-role="collapsible" data-mini="true">
+		   <h3>? Informações</h3>
+		   <p>O gasto energético (calórico) de uma atividade física é determinado pela relação entre sua <strong>intensidade e duração</strong>.</p>
+		   <p>Os valores são específicos para cada pessoa. Assim, para descobrir o gasto calórico basta selecionar uma entre as 400 atividades cadastradas, divididas em 9 categorias, e indicar o tempo gasto.<p/> 
+		   <p>A partir desses valores é possível traçar estratégias para gerar alterações na massa corporal total, ou adotar uma vida mais ativa e saudável.</p>
+		   <p>As atividades e os seus valores de referência são adaptados de Ainsworth et al. (2010). Para diagnósticos e prescrição da atividade física consulte um Educador Físico.</p>
+		   <p>Em caso de dúvidas, reclamações, sugestões e /ou elogios, não deixe de entrar em contato: <strong>zeusresponde@zeusfitness.com.br</strong>.</p>
+		</div>
+		
+		
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="c" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#" data-role="button" data-icon="gear" data-iconpos="top" data-prefetch="true" id="btnPerfil">Perfil</a></li>
+				<li><a href="#" data-role="button" data-icon="star" data-iconpos="top" data-prefetch="true" id="btnTMB">TMB / GET</a></li>
+				<li><a href="#" data-role="button" data-icon="grid" data-iconpos="top" data-prefetch="true" class="ui-btn-active ui-state-persist" id="btnAtividade">Atividades</a></li>
+				<li><a href="#" data-role="button" data-icon="delete" data-iconpos="top" data-prefetch="true" id="btnSair">Sair</a></li>
+			</ul>
+		</div>
+	</div>
+
+</div><!-- /page -->
+
+<div data-role="page" id="atividade">
+
+	<div class="ui-bar ui-bar-b">
+		<h3 id="headerAtividade">Atividade</h3>
+	</div>
+
+<!--	<div data-role="header" data-position="fixed" data-theme="b">
+		<h3 id="headerAtividade">Atividade</h3>
+	</div>
+	-->
+	
+	<div data-role="content">	
+	
+		<div class="content-primary">	
+			<label for="rangeTempo">Tempo(minutos):</label>
+			<input type="number" name="rangeTempo" id="rangeTempo" onChange="calcularGETAtividade();" value="30" data-highlight="true" />
+			<input type="hidden" name="GETAtividade" id="GETAtividade" value=""/>
+		</div><!--/content-primary -->	
+		
+		<div data-role="footer" data-theme="b">
+			<h3>Gasto energético (Kcal):</h3>
+			<h3 name="gastoEne" id="gastoEne">200</h3>
+		</div>
+		
+		<div data-role="collapsible" data-mini="true">
+		   <h3>? Informações</h3>
+		   <p>O gasto energético (calórico) de uma atividade física é determinado pela relação entre sua <strong>intensidade e duração</strong>.</p>
+		   <p>Os valores são específicos para cada pessoa. Assim, para descobrir o gasto calórico basta selecionar uma entre as 400 atividades cadastradas, divididas em 9 categorias, e indicar o tempo gasto.<p/> 
+		   <p>A partir desses valores é possível traçar estratégias para gerar alterações na massa corporal total, ou adotar uma vida mais ativa e saudável.</p>
+		   <p>As atividades e os seus valores de referência são adaptados de Ainsworth et al. (2010). Para diagnósticos e prescrição da atividade física consulte um Educador Físico.</p>
+		   <p>Em caso de dúvidas, reclamações, sugestões e /ou elogios, não deixe de entrar em contato: <strong>zeusresponde@zeusfitness.com.br</strong>.</p>
+		</div>
+
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+</body>
+</html>
