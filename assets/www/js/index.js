@@ -109,14 +109,6 @@
 		console.log('Update Sucess');
 	}
 	
-	$( document ).bind( 'mobileinit', function(){
-		$.mobile.page.prototype.options.domCache = false;
-		$.mobile.allowCrossDomainPages = true;
-		$.support.cors = true;
-		$.mobile.loadingMessage = "Carregando...";
-		$.mobile.pageLoadErrorMessage = "Erro ao carregar a página...";
-	});
-	
 	$( '#listaAtividades' ).live( 'pageinit',function(event){
 	
 		$( '#btnTMB' ).live( 'tap',function(event){
