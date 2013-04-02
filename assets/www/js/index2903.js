@@ -37,7 +37,7 @@
         console.log("Returned rows = " + results.rows.length);
         // this will be true since it was a select statement and so rowsAffected was 0
         if (results.rows.length == 0) {
-            console.log('Perfil ainda nÃ£o foi criado!');
+            console.log('Perfil ainda não foi criado!');
 			tx.executeSql('INSERT INTO PERFIL (cod, genre, age, weight, height) VALUES (1, "Masculino", 21, 0, 0)');
             return false;
         }
@@ -109,9 +109,9 @@
 		console.log('Update Sucess');
 	}
 	
-/*	$( "#listaAtividades" ).on( "pageinit",function(event){
+	$( '#listaAtividades' ).live( 'pageinit',function(event){
 	
-		$( '#btnTMB' ).on( 'tap',function(event){
+		$( '#btnTMB' ).live( 'tap',function(event){
 			console.log($("#numberIMC").text().parseInt());
 			if($("#numberIMC").text().parseInt() > 25){
 				$.mobile.changePage("#TMB");
@@ -122,7 +122,7 @@
 		
 		});
 		
-		$( '#btnGET' ).on( 'tap',function(event){
+		$( '#btnGET' ).live( 'tap',function(event){
 			
 			if($("#numberIMC").val() > 25){
 				$.mobile.changePage("#GET");
@@ -133,20 +133,20 @@
 
 		});
 		
-		$( '#btnAtividade' ).on( 'tap',function(event){
+		$( '#btnAtividade' ).live( 'tap',function(event){
 			$.mobile.changePage("#listaAtividades");
 		});
 		
-		$( '#btnPerfil' ).on( 'tap',function(event){
+		$( '#btnPerfil' ).live( 'tap',function(event){
 			$.mobile.changePage("#page");
 		});
-	});*/
+	});
 	
-	$( "#atividade" ).on( "pageinit",function(event){
+	$( '#atividade' ).live( 'pageinit',function(event){
 	
 		calcularGETAtividade();
 	
-		/*$( '#btnTMB' ).on( 'tap',function(event){
+		$( '#btnTMB' ).live( 'tap',function(event){
 			
 			if($("#numberIMC").val() > 25){
 				$.mobile.changePage("#TMB");
@@ -157,7 +157,7 @@
 		
 		});
 		
-		$( '#btnGET' ).on( 'tap',function(event){
+		$( '#btnGET' ).live( 'tap',function(event){
 			
 			if($("#numberIMC").text() > 25){
 				$.mobile.changePage("#GET");
@@ -168,21 +168,21 @@
 
 		});
 		
-		$( '#btnAtividade' ).on( 'tap',function(event){
+		$( '#btnAtividade' ).live( 'tap',function(event){
 			$.mobile.changePage("#listaAtividades");
 		});
 		
-		$( '#btnPerfil' ).on( 'tap',function(event){
+		$( '#btnPerfil' ).live( 'tap',function(event){
 			$.mobile.changePage("#page");
-		});*/
+		});
 	});	
 	
 	
-	$( "#page" ).on( "pageinit",function(event){
+	$( '#page' ).live( 'pageinit',function(event){
 		//var db = window.openDatabase("Database", "1.0", "Gasto Calorico", 200000);
 		//db.transaction(getPerfil, errorCB);
 	
-		$( "#btnSair" ).on( 'tap', function(event){
+		$( '#btnSair' ).live( 'tap',function(event){
 			console.log("Fechar.");
 			navigator.app.exitApp();
 		
@@ -190,54 +190,29 @@
 	
 		$("#selectGenero1a").click(function() {
 			savePerfil();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 			genre = "Feminino";
 		});
 		
 		$("#selectGeneroa").click(function() {
 			savePerfil();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 			genre = "Masculino";
 		});
 		
 		$("#sliderIdade").focusout(function() {
 			savePerfil();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 		});
 		
 		$("#numberAltura").focusout(function() {
 			calcularIMC();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 			savePerfil();
 		});
 		
 		$("#numberMassa").focusout(function() {
 			calcularIMC();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 			savePerfil();
 		});
 		
-		/*$( "#btnTMB" ).on( 'tap', function(event){
+		$( '#btnTMB' ).live( 'tap',function(event){
 				console.log($("#numberIMC").text());
 				if($("#numberIMC").text() > 25){
 					$.mobile.changePage("#TMB");
@@ -247,7 +222,7 @@
 				}
 		});
 		
-		$( '#btnGET' ).on( 'tap',function(event){
+		$( '#btnGET' ).live( 'tap',function(event){
 			if($("#numberIMC").val() > 25){
 				$.mobile.changePage("#GET");
 			}
@@ -256,49 +231,49 @@
 			}
 		});
 		
-		$( '#btnAtividade' ).on( 'tap',function(event){
+		$( '#btnAtividade' ).live( 'tap',function(event){
 			$.mobile.changePage("#listaAtividades");
-		});*/
+		});
 		
-		//onDeviceReady();
+		onDeviceReady();
 	});
 	
-	$( "#TMB" ).on( "pageinit",function(event){
-		$( '#btnTMBMG' ).on( 'tap',function(event){
+	$( '#TMB' ).live( 'pageinit',function(event){
+		$( '#btnTMBMG' ).live( 'tap',function(event){
 			$.mobile.changePage("#TMBMG");
 		});
-		$( '#btnTMBMM' ).on( 'tap',function(event){
+		$( '#btnTMBMM' ).live( 'tap',function(event){
 			$.mobile.changePage("#TMBMM");
 		});
 	});
 
-/*	$( "#GET" ).on( "pageinit",function(event){
-		$( '#btnGETMG' ).on( 'tap',function(event){
+	$( '#GET' ).live( 'pageinit',function(event){
+		$( '#btnGETMG' ).live( 'tap',function(event){
 			$.mobile.changePage("#GETMG");
 		});
-		$( '#btnGETMM' ).on( 'tap',function(event){
+		$( '#btnGETMM' ).live( 'tap',function(event){
 			$.mobile.changePage("#GETMM");
 		});
 	});
-*/
-	$( "#TMBMG" ).on( "pageinit",function(event){
+	
+	$( '#TMBMG' ).live( 'pageinit',function(event){
 		$("#pTMBMG").text(calcularTMBG().toFixed(2));
 		$("#pTMBMG").css("font-weight","bold");
 		
 		$("#pGETMG").text(calcularGETG().toFixed(2));
 		$("#pGETMG").css("font-weight","bold");
 		
-		/*$( '#btnSairTMBMG' ).on( 'tap',function(event){
+		$( '#btnSairTMBMG' ).live( 'tap',function(event){
 			console.log("Fechar.");
 			navigator.app.exitApp();
 		
 		});
 		
-		$( '#btnPerfilTMBMG' ).on( 'tap',function(event){
+		$( '#btnPerfilTMBMG' ).live( 'tap',function(event){
 			$.mobile.changePage("#page");
 		});
 		
-		$( '#btnGETTMBMG' ).on( 'tap',function(event){
+		$( '#btnGETTMBMG' ).live( 'tap',function(event){
 			if($("#numberIMC").text() > 25){
 				$.mobile.changePage("#GET");
 			}
@@ -307,12 +282,12 @@
 			}
 		});
 		
-		$( '#btnAtividadeTMBMG' ).on( 'tap',function(event){
+		$( '#btnAtividadeTMBMG' ).live( 'tap',function(event){
 			$.mobile.changePage("#listaAtividades");
-		});*/
+		});
 	});
 	
-	$( "#TMBMM" ).on( "pageinit",function(event){
+	$( '#TMBMM' ).live( 'pageinit',function(event){
 		console.log("Page #TMBMM init.");
 		$("#pTMBMM").text(calcularTMB().toFixed(2));
 		$("#pTMBMM").css("font-weight","bold");
@@ -320,17 +295,17 @@
 		$("#pGETMM").text(calcularGET().toFixed(2));
 		$("#pGETMM").css("font-weight","bold");
 		
-/*		$( '#btnSairTMBMM' ).on( 'tap',function(event){
+		$( '#btnSairTMBMM' ).live( 'tap',function(event){
 			console.log("Fechar.");
 			navigator.app.exitApp();
 		
 		});
 		
-		$( '#btnPerfilTMBMM' ).on( 'tap',function(event){
+		$( '#btnPerfilTMBMM' ).live( 'tap',function(event){
 			$.mobile.changePage("#page");
 		});
 		
-		$( '#btnGETTMBMM' ).on( 'tap',function(event){
+		$( '#btnGETTMBMM' ).live( 'tap',function(event){
 			if($("#numberIMC").text() > 25){
 				$.mobile.changePage("#GET");
 			}
@@ -339,22 +314,22 @@
 			}
 		});
 		
-		$( '#btnAtividadeTMBMM' ).on( 'tap',function(event){
+		$( '#btnAtividadeTMBMM' ).live( 'tap',function(event){
 			$.mobile.changePage("#listaAtividades");
-		});*/
+		});
 	});
-
-/*	$( "#GETMG" ).on( "pageinit",function(event){	
+	
+	$( '#GETMG' ).live( 'pageinit',function(event){
 		console.log("Page #GETMG init.");
 		$("#pGETMG").text("GET: " + calcularGET().toFixed(2));
 		$("#pGETMG").css("font-weight","bold");
 	});
 	
-	$( "#GETMM" ).on( "pageinit",function(event){
+	$( '#GETMM' ).live( 'pageinit',function(event){
 		console.log("Page #GETMM init.");
-		$("#pGETMM").text("GET: " + calcularGET().toFixed(2));
+		$("#pGETMM").text("GET: " + calcularGET());
 		$("#pGETMM").css("font-weight","bold");
-	});*/
+	});
 	
 	function calcularIMC(){
 		var IMC = 0;
@@ -389,8 +364,8 @@
 			console.log("Baixo: " + IMC);
 		}
 		if(IMC >= 18 && IMC < 25){
-			$("#classIMC").text("MÃ©dio");
-			console.log("MÃ©dio: " + IMC);
+			$("#classIMC").text("Médio");
+			console.log("Médio: " + IMC);
 		}
 		if(IMC >= 25 && IMC < 30){
 			$("#classIMC").text("Elevado");
@@ -610,8 +585,6 @@
 	function carregaAtividade(nome, met){
 		$("#GETAtividade").val(met);
 		$("#headerAtividade").text(nome);
-		$("#rangeTempo").val(30);
-		calcularGETAtividade();
 		$.mobile.changePage("#atividade");
 	}
 	
