@@ -3,8 +3,13 @@
 	var weight;
 	var height;
 	var id;
-
-	// Wait for Cordova to load
+	var selectedatividade;
+	var selectedatividadeMet;
+	var totalDiario;
+	var idAtividade;
+	var getDetalhado;
+	
+    // Wait for Cordova to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -13,11 +18,47 @@
     function onDeviceReady() {
 		var db = window.openDatabase("Database", "1.0", "Gasto Calorico", 200000);
 		db.transaction(createTable, errorCB, createTableSucess);
+		document.addEventListener("menubutton", onMenuKeyDown, false);
+                if (window.devicePixelRatio == 1.5) {
+                        //alert("This is a high-density screen");
+                      } else if (window.devicePixelRatio == 0.75) {
+                        //alert("This is a low-density screen");
+                      }
+                      //alert(window.devicePixelRatio);
+    }
+	
+	// Handle the menu button
+    //
+    function onMenuKeyDown() {
+		var r=confirm("Fechar aplicativo?")
+		if (r==true)
+		  {
+		  	navigator.app.exitApp();;
+		  }
+		else
+		  {
+		  	
+		  }
     }
 	
 	function createTable(tx){
-		//tx.executeSql('DROP TABLE IF EXISTS PERFIL');
+		//tx.executeSql('DROP TABLE IF EXISTS ATIVIDADES');
         tx.executeSql('CREATE TABLE IF NOT EXISTS PERFIL (cod, genre, age, weight, height)');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS ATIVIDADES (id INTEGER PRIMARY KEY AUTOINCREMENT, atividade, duracao, kcal)');
+	}
+	
+	function removeActivity(tx){
+		tx.executeSql('DELETE FROM ATIVIDADES WHERE id = "' + idAtividade + '"' );	
+	}
+	
+	function removeActivitySucess(){
+		var db = window.openDatabase("Database", "1.0", "Gasto Calorico", 200000);
+		db.transaction(loadActivity, errorCB);
+		$('#atividadeExcluida').popup("open");
+	}
+	
+	function addActivity(tx){
+		tx.executeSql("INSERT INTO ATIVIDADES (atividade, duracao, kcal) VALUES('"+ selectedatividade +"','"+ $("#duracaoAtividade").val() +"','"+ $('#kcalAtividade').val() +"')");	
 	}
 	
 	function errorCB(err) {
@@ -28,6 +69,37 @@
 		var db = window.openDatabase("Database", "1.0", "Gasto Calorico", 200000);
         db.transaction(queryDB, errorCB);
     }
+	
+	function loadActivity(tx){
+		tx.executeSql('SELECT * FROM ATIVIDADES', [], queryActivitySuccess, errorCB);
+	}
+	
+	function queryActivitySuccess(tx, results){
+		var total = 0;
+		var total1 = 0;
+                var len = results.rows.length;
+            var parent = document.getElementById('gridAtividades');
+            parent.innerHTML = '<li data-role="list-divider">Resgistro de atividades</li>';
+            for (var i=0; i<len; i++){
+                        total = total + parseFloat(results.rows.item(i).duracao);
+			total1 = total1 + parseFloat(results.rows.item(i).kcal);
+                    parent.innerHTML = parent.innerHTML + '<li><a href="#" onClick="excluirAtividade('+ results.rows.item(i).id +');"><p>"'+ results.rows.item(i).atividade +'"</p> <p>'+ results.rows.item(i).duracao +' minutos</p><p>'+ results.rows.item(i).kcal +' kcal</p></a></li>';
+            }
+            totalDiario = total /60;
+            parent.innerHTML = parent.innerHTML + '<li data-role="list-divider">'+ totalDiario.toFixed(2) +' horas ('+ total.toFixed(2) +' min) '+ total1.toFixed(2) +' kcal.</li>';
+            
+            $(parent).listview("refresh");
+		/*$('#gridAtividades').html('<ul data-role="listview" data-inset="true" id="gridAtividades">');
+		for (var i=0;i<results.rows.length;i++)
+		{ 
+			$('#gridAtividades').append('<li><a href="#">Apple</a></li><li><a href="#" onClick="excluirAtividade('+ results.rows.item(i).id +');">Executar a atividade <strong>"'+ results.rows.item(i).atividade +'"</strong> por <strong>'+ results.rows.item(i).duracao +'</strong> minutos, consumiu <strong>'+ results.rows.item(i).kcal +'</strong> calorias.</a></li>');
+			total = total + parseFloat(results.rows.item(i).duracao);
+			total1 = total1 + parseFloat(results.rows.item(i).kcal);
+		}
+		totalDiario = total /60;
+		$('#gridAtividades').append('<li>Total '+ totalDiario.toFixed(2) +' ('+ total.toFixed(2) +')'+ total1 +'</li>');*/
+		getDetalhado = total1;
+	}
 	
 	function queryDB(tx) {
         tx.executeSql('SELECT * FROM PERFIL WHERE cod = 1', [], querySuccess, errorCB);
@@ -182,58 +254,33 @@
 		//var db = window.openDatabase("Database", "1.0", "Gasto Calorico", 200000);
 		//db.transaction(getPerfil, errorCB);
 	
-		$( "#btnSair" ).on( 'tap', function(event){
+		/*$( "#btnSair" ).on( 'tap', function(event){
 			console.log("Fechar.");
 			navigator.app.exitApp();
 		
-		});
+		});*/
 	
 		$("#selectGenero1a").click(function() {
 			savePerfil();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 			genre = "Feminino";
 		});
 		
 		$("#selectGeneroa").click(function() {
 			savePerfil();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 			genre = "Masculino";
 		});
 		
 		$("#sliderIdade").focusout(function() {
 			savePerfil();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 		});
 		
 		$("#numberAltura").focusout(function() {
 			calcularIMC();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 			savePerfil();
 		});
 		
 		$("#numberMassa").focusout(function() {
 			calcularIMC();
-			$("#pTMBMM").text(calcularTMB().toFixed(2));
-			$("#pTMBMM").css("font-weight","bold");
-			
-			$("#pGETMM").text(calcularGET().toFixed(2));
-			$("#pGETMM").css("font-weight","bold");
 			savePerfil();
 		});
 		
@@ -260,7 +307,7 @@
 			$.mobile.changePage("#listaAtividades");
 		});*/
 		
-		//onDeviceReady();
+		onDeviceReady();
 	});
 	
 	$( "#TMB" ).on( "pageinit",function(event){
@@ -287,6 +334,8 @@
 		
 		$("#pGETMG").text(calcularGETG().toFixed(2));
 		$("#pGETMG").css("font-weight","bold");
+		
+		calcularResultado();
 		
 		/*$( '#btnSairTMBMG' ).on( 'tap',function(event){
 			console.log("Fechar.");
@@ -320,6 +369,8 @@
 		$("#pGETMM").text(calcularGET().toFixed(2));
 		$("#pGETMM").css("font-weight","bold");
 		
+		calcularResultado();
+		
 /*		$( '#btnSairTMBMM' ).on( 'tap',function(event){
 			console.log("Fechar.");
 			navigator.app.exitApp();
@@ -344,17 +395,24 @@
 		});*/
 	});
 
-/*	$( "#GETMG" ).on( "pageinit",function(event){	
+	$( "#GETMG" ).on( "pageinit",function(event){	
 		console.log("Page #GETMG init.");
 		$("#pGETMG").text("GET: " + calcularGET().toFixed(2));
 		$("#pGETMG").css("font-weight","bold");
+		calcularResultado();
+	});
+	
+	$( "#diario" ).on( "pageinit",function(event){	
+		var db = window.openDatabase("Database", "1.0", "Gasto Calorico", 200000);
+		db.transaction(loadActivity, errorCB);		
 	});
 	
 	$( "#GETMM" ).on( "pageinit",function(event){
 		console.log("Page #GETMM init.");
-		$("#pGETMM").text("GET: " + calcularGET().toFixed(2));
+		$("#pGETMM").text("GET: " + calcularGET());
 		$("#pGETMM").css("font-weight","bold");
-	});*/
+		calcularResultado();
+	});
 	
 	function calcularIMC(){
 		var IMC = 0;
@@ -618,15 +676,91 @@
 	function updateGET(){
 		$("#pGETMM").text(calcularGET().toFixed(2));
 		$("#pGETMM").css("font-weight","bold");
+		calcularResultado();
 	}
 	
 	function updateGETG(){
 		$("#pGETMG").text(calcularGETG().toFixed(2));
 		$("#pGETMG").css("font-weight","bold");
+		calcularResultado();
 	}
 	
 	function calcularGETAtividade(){
 		var val = $("#GETAtividade").val().replace(',','.') * ($("#rangeTempo").val() / 60) * $("#numberMassa").val();
 		$("#gastoEne").text(val.toFixed(2));
 		$("#gastoEne").css("font-weight","bold");
+	}
+	
+	function calcularResultado(){
+		var x;
+		var y;
+		var get = calcularGET().toFixed(2); //verificar se massa gorda ou normal
+		console.log("GET " + get);
+		console.log("Kilo " + $("#kiloMeta").val().replace(',','.'));
+		console.log("Calc " + $("#kiloMeta").val() * 256.7);
+		if($('#selectObjetivoA').filter(':checked').val() == "menos"){
+			x = parseFloat(get) - parseFloat($("#kiloMeta").val()) * 256.7;
+			console.log('Menos');
+		}
+		else{
+			x = parseFloat(get) + parseFloat($("#kiloMeta").val()) * 256.7;
+			console.log('Mais');
+		}
+		
+		if($('#selectObjetivoA').filter(':checked').val() == "menos"){
+			y = parseFloat(getDetalhado) - parseFloat($("#kiloMeta").val()) * 256.7;
+			console.log('Menos Det');
+		}
+		else{
+			y = parseFloat(getDetalhado) + parseFloat($("#kiloMeta").val()) * 256.7;
+			console.log('Mais Det');
+		}
+		
+		$("#resultadoMeta").text(parseFloat(x).toFixed(2));
+		$("#resultadoMeta").css("font-weight","bold");
+		
+		$("#resultadoMetaDetalhado").text(parseFloat(y).toFixed(2));
+		$("#resultadoMetaDetalhado").css("font-weight","bold");
+		
+	}
+	
+	function selectAtividade(atividade, met){
+		$('#atividadeSelecionada').html(atividade);
+		selectedatividade = atividade;
+		selectedatividadeMet = met;
+		calcularKcal();
+		$('#listaAtividadeSelect').popup("close");
+	}
+	
+	function calcularKcal(){
+		var val = selectedatividadeMet.replace(',','.') * ($("#duracaoAtividade").val() / 60) * $("#numberMassa").val();
+		$('#kcalAtividade').val(val.toFixed(2));
+	}
+	
+	function insertActivity(){
+		if(totalDiario+$("#duracaoAtividade").val()/60>24){
+			$('#24Horas').popup("open");	
+			return false;
+		}
+		var db = window.openDatabase("Database", "1.0", "Gasto Calorico", 200000);
+		db.transaction(addActivity, errorCB, addActivitySucess);
+	}
+	
+	function addActivitySucess(){
+		/*$('#gridAtividades').append('<div class="ui-block-a"><div class="ui-bar ui-bar-c">'+ selectedatividade +'</div></div>                <div class="ui-block-b"><div class="ui-bar ui-bar-c">'+$("#duracaoAtividade").val()+'</div></div>                <div class="ui-block-c"><div class="ui-bar ui-bar-c">'+ $('#kcalAtividade').val() +'</div></div>');*/
+		var db = window.openDatabase("Database", "1.0", "Gasto Calorico", 200000);
+		db.transaction(loadActivity, errorCB);
+		$('#atividadeSelecionada').html("Selecionar Atividade");
+		$("#kcalAtividade").val("");
+		$("#duracaoAtividade").val("");
+	}
+	
+	function excluirAtividade(id){
+		idAtividade = id;
+		$('#excluirAtividades').popup("open");
+	}
+	
+	function removeAtividade(){
+		var db = window.openDatabase("Database", "1.0", "Gasto Calorico", 200000);
+		db.transaction(removeActivity, errorCB, removeActivitySucess);		
 	}
