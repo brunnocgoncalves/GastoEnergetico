@@ -695,9 +695,9 @@
 		var x;
 		var y;
 		var get = calcularGET().toFixed(2); //verificar se massa gorda ou normal
-		console.log("GET " + get);
-		console.log("Kilo " + $("#kiloMeta").val().replace(',','.'));
-		console.log("Calc " + $("#kiloMeta").val() * 256.7);
+		//console.log("GET " + get);
+		//console.log("Kilo " + $("#kiloMeta").val().replace(',','.'));
+		//console.log("Calc " + $("#kiloMeta").val() * 256.7);
 		if($('#selectObjetivoA').filter(':checked').val() == "menos"){
 			x = parseFloat(get) - parseFloat($("#kiloMeta").val()) * 256.7;
 			console.log('Menos');
